@@ -1,0 +1,5651 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>We Chat</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --blue:#1877f2;
+  --blue2:#5146e5;
+  --bg:#f3f7fc;
+  --card:#fff;
+  --text:#182230;
+  --muted:#6c7789;
+  --line:#e5eaf1;
+  --green:#18b56b;
+  --red:#ef4050;
+  --shadow:0 5px 22px rgba(30,60,100,.08)
+}
+
+body{
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  padding-bottom:82px
+}
+
+button,input,textarea{font:inherit}
+button{border:0;cursor:pointer}
+img{max-width:100%;display:block}
+.hidden{display:none!important}
+
+/* HEADER */
+
+.top{
+  height:78px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:0 22px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 12px rgba(0,0,0,.05)
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  min-width:220px
+}
+
+.logoIcon{
+  width:55px;
+  height:44px;
+  border-radius:18px 18px 18px 6px;
+  background:linear-gradient(135deg,#20a4ff,#4b35e7);
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:24px;
+  font-weight:bold
+}
+
+.logoText{
+  font-family:Georgia,serif;
+  color:#1765d4;
+  font-size:30px;
+  font-weight:bold
+}
+
+.logoSub{
+  color:#748095;
+  font-size:12px;
+  margin-top:2px
+}
+
+.search{
+  flex:1;
+  max-width:500px;
+  height:46px;
+  border-radius:25px;
+  background:#f1f5fa;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:0 16px
+}
+
+.search input{
+  width:100%;
+  border:0;
+  outline:0;
+  background:none
+}
+
+.topBtns{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:10px
+}
+
+.iconBtn{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:#f1f4f8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  position:relative
+}
+
+.badge{
+  position:absolute;
+  right:-2px;
+  top:-3px;
+  min-width:20px;
+  height:20px;
+  border-radius:12px;
+  background:#ef3340;
+  color:#fff;
+  font-size:11px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 5px
+}
+
+.miniAvatar{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #fff;
+  box-shadow:0 1px 6px #cbd4df;
+  cursor:pointer
+}
+
+/* APP */
+
+.app{
+  width:min(100%,1050px);
+  margin:18px auto;
+  padding:0 12px
+}
+
+/* COMPOSER */
+
+.composer{
+  background:#fff;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:var(--shadow)
+}
+
+.composeTop{
+  display:flex;
+  gap:12px;
+  align-items:center
+}
+
+.composeAvatar{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  object-fit:cover;
+  cursor:pointer
+}
+
+.composeInput{
+  flex:1;
+  min-height:52px;
+  border-radius:27px;
+  background:#f1f5fa;
+  display:flex;
+  align-items:center;
+  padding:0 20px;
+  color:#69758a;
+  cursor:pointer
+}
+
+.composeActions{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  margin-top:15px
+}
+
+.composeAction{
+  background:#fff;
+  padding:12px 5px;
+  color:#394559;
+  font-weight:600;
+  border-right:1px solid var(--line)
+}
+
+.composeAction:last-child{border:0}
+
+.actionIcon{
+  margin-right:7px;
+  font-size:20px
+}
+
+.red{color:#ef4050}
+.green{color:#16ad67}
+.purple{color:#7045df}
+.orange{color:#f5a623}
+
+/* STORIES */
+
+.stories{
+  margin-top:16px;
+  background:#fff;
+  padding:12px;
+  border-radius:22px;
+  box-shadow:var(--shadow);
+  overflow:hidden
+}
+
+.storyRow{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  scrollbar-width:none
+}
+
+.storyRow::-webkit-scrollbar{display:none}
+
+.story{
+  flex:0 0 145px;
+  height:205px;
+  border-radius:17px;
+  overflow:hidden;
+  position:relative;
+  background:#eaf1fa;
+  cursor:pointer
+}
+
+.story>img:first-child{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+
+.storyShade{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(transparent 42%,rgba(0,0,0,.78))
+}
+
+.storyName{
+  position:absolute;
+  left:12px;
+  bottom:13px;
+  color:#fff;
+  font-weight:bold;
+  text-shadow:0 1px 3px #000
+}
+
+.storyAvatar{
+  position:absolute;
+  top:10px;
+  left:10px;
+  width:43px!important;
+  height:43px!important;
+  border-radius:50%;
+  border:3px solid #1877f2;
+  object-fit:cover!important
+}
+
+.createStory{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(160deg,#eaf4ff,#d9eaff)
+}
+
+.plusCircle{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  background:#1877f2;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:33px;
+  margin-bottom:12px
+}
+
+/* FILTER */
+
+.filters{
+  display:flex;
+  gap:10px;
+  margin:16px 0;
+  overflow-x:auto;
+  scrollbar-width:none
+}
+
+.filters::-webkit-scrollbar{display:none}
+
+.filter{
+  min-width:125px;
+  height:50px;
+  border-radius:28px;
+  background:#fff;
+  color:#657085;
+  font-weight:bold;
+  box-shadow:0 2px 8px rgba(20,50,80,.04)
+}
+
+.filter.active{
+  color:#fff;
+  background:linear-gradient(135deg,#1877f2,#2868e8)
+}
+
+/* POST */
+
+.post{
+  background:#fff;
+  border-radius:20px;
+  margin-bottom:16px;
+  overflow:hidden;
+  box-shadow:var(--shadow)
+}
+
+.postHead{
+  display:flex;
+  align-items:center;
+  padding:16px 17px 10px;
+  gap:11px
+}
+
+.postAvatar{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  object-fit:cover;
+  cursor:pointer
+}
+
+.postUser{flex:1}
+
+.postUser b{
+  font-size:16px;
+  cursor:pointer
+}
+
+.postMeta{
+  font-size:12px;
+  color:#7c8797;
+  margin-top:5px
+}
+
+.more{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#f4f6f9;
+  font-size:19px
+}
+
+.postText{
+  padding:3px 18px 13px;
+  font-size:16px;
+  line-height:1.7;
+  white-space:pre-wrap
+}
+
+.postImage{
+  width:100%;
+  max-height:620px;
+  object-fit:cover
+}
+
+.postVideo{
+  width:100%;
+  max-height:620px;
+  background:#000
+}
+
+.postStats{
+  padding:10px 18px;
+  display:flex;
+  justify-content:space-between;
+  color:#6c7789;
+  font-size:14px
+}
+
+.postButtons{
+  border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:repeat(4,1fr)
+}
+
+.postButtons button{
+  height:48px;
+  background:#fff;
+  color:#596579;
+  font-weight:600
+}
+
+.postButtons button:hover{
+  background:#f5f7fa
+}
+
+.liked{color:#e9314e!important}
+.saved{color:#1877f2!important}
+
+/* COMMENT BOX */
+
+.commentBox{
+  padding:10px 15px;
+  border-top:1px solid var(--line);
+  display:flex;
+  gap:8px
+}
+
+.commentBox input{
+  flex:1;
+  border:0;
+  outline:0;
+  background:#f1f4f8;
+  border-radius:20px;
+  padding:9px 13px
+}
+
+.commentBox button{
+  width:40px;
+  border-radius:50%;
+  background:#1877f2;
+  color:#fff
+}
+
+.comments{
+  padding:0 15px 10px
+}
+
+.comment{
+  display:flex;
+  gap:8px;
+  margin-top:8px
+}
+
+.comment img{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  object-fit:cover
+}
+
+.commentText{
+  background:#f2f4f8;
+  border-radius:12px;
+  padding:7px 10px;
+  font-size:13px
+}
+
+/* BOTTOM */
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:74px;
+  background:#fff;
+  box-shadow:0 -3px 15px rgba(0,0,0,.08);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  z-index:200
+}
+
+.navBtn{
+  background:#fff;
+  color:#657085;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  position:relative
+}
+
+.navBtn span:first-child{
+  font-size:23px
+}
+
+.navBtn small{
+  font-size:11px
+}
+
+.navBtn.active{
+  color:#fff;
+  background:#1877f2;
+  border-radius:16px;
+  transform:translateY(-1px);
+  box-shadow:0 4px 12px rgba(24,119,242,.22)
+}
+
+.navBtn.active span:first-child{
+  color:#fff
+}
+
+.navBtn.active small{
+  color:#fff;
+  font-weight:700
+}
+
+.addBtn{
+  width:55px;
+  height:55px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#1877f2,#6d35e8);
+  color:#fff;
+  font-size:31px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:-18px;
+  box-shadow:0 7px 17px rgba(45,100,230,.3)
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(10,20,35,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:600;
+  padding:15px
+}
+
+.modal.show{
+  display:flex
+}
+
+.modalBox{
+  width:min(100%,540px);
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:22px;
+  padding:20px
+}
+
+.modalHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px
+}
+
+.close{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#eef2f7;
+  font-size:22px
+}
+
+.field{
+  margin-bottom:13px
+}
+
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:bold;
+  color:#687386;
+  margin-bottom:6px
+}
+
+.field input,
+.field textarea{
+  width:100%;
+  border:1px solid #dfe5ed;
+  border-radius:12px;
+  padding:12px;
+  outline:0
+}
+
+.field textarea{
+  min-height:100px;
+  resize:vertical
+}
+
+.primary{
+  width:100%;
+  height:48px;
+  border-radius:13px;
+  color:#fff;
+  background:linear-gradient(135deg,#1877f2,#386bea);
+  font-weight:bold
+}
+
+.secondary{
+  width:100%;
+  height:45px;
+  border-radius:12px;
+  background:#edf2f7;
+  margin-top:9px;
+  font-weight:bold
+}
+
+/* PROFILE */
+
+.profile{
+  background:#fff;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:var(--shadow)
+}
+
+.cover{
+  height:240px;
+  background:linear-gradient(135deg,#b8d8ff,#dfeaff);
+  position:relative
+}
+
+.cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+
+.coverEdit{
+  position:absolute;
+  right:15px;
+  bottom:15px;
+  background:#fff;
+  border-radius:12px;
+  padding:10px 14px;
+  font-weight:bold
+}
+
+.profileInfo{
+  padding:0 20px 20px;
+  position:relative
+}
+
+.avatarWrap{
+  position:relative;
+  width:116px;
+  margin-top:-58px
+}
+
+.profileAvatar{
+  width:116px;
+  height:116px;
+  border-radius:50%;
+  border:5px solid #fff;
+  object-fit:cover;
+  box-shadow:0 3px 12px #b8c3d0
+}
+
+.avatarEdit{
+  position:absolute;
+  right:2px;
+  bottom:5px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#1877f2;
+  color:#fff;
+  border:3px solid #fff
+}
+
+.profileName{
+  font-size:25px;
+  margin-top:10px
+}
+
+.username{
+  color:#728096;
+  margin-top:4px
+}
+
+.bio{
+  margin-top:12px;
+  line-height:1.6;
+  color:#4e596a
+}
+
+.profileMeta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:12px;
+  color:#687386;
+  font-size:13px
+}
+
+.profileActions{
+  display:flex;
+  gap:9px;
+  margin-top:16px
+}
+
+.profileActions button{
+  height:43px;
+  padding:0 17px;
+  border-radius:11px;
+  font-weight:bold
+}
+
+.editBtn{
+  background:#1877f2;
+  color:#fff
+}
+
+.grayBtn{
+  background:#edf2f7;
+  color:#344054
+}
+.logoutBtn{
+  background:#fff0f2;
+  color:#e0314f;
+  border:1px solid #ffd5dc
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  margin-top:20px
+}
+
+.stat{
+  padding:15px 5px;
+  text-align:center
+}
+
+.stat b{
+  display:block;
+  font-size:18px
+}
+
+.stat span{
+  font-size:12px;
+  color:#788396
+}
+
+.profileTabs{
+  display:grid;
+  grid-template-columns:repeat(5,1fr)
+}
+
+.profileTabs button{
+  height:48px;
+  background:#fff;
+  color:#667085;
+  font-weight:bold
+}
+
+.profileTabs button.active{
+  color:#1877f2;
+  border-bottom:3px solid #1877f2
+}
+
+/* PEOPLE */
+
+.sectionTitle{
+  font-size:20px;
+  margin:10px 0 15px
+}
+
+.person{
+  background:#fff;
+  border-radius:16px;
+  padding:13px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+  box-shadow:var(--shadow)
+}
+
+.person img{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  object-fit:cover
+}
+
+.personInfo{
+  flex:1
+}
+
+.personInfo b{
+  display:block
+}
+
+.personInfo small{
+  color:#788396
+}
+
+.person button{
+  background:#1877f2;
+  color:#fff;
+  border-radius:10px;
+  padding:9px 13px
+}
+
+/* CHAT */
+
+.chatList{
+  margin-top:5px
+}
+
+.chatItem{
+  background:#fff;
+  padding:13px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border-radius:15px;
+  margin-bottom:8px;
+  box-shadow:var(--shadow)
+}
+
+.chatItem img{
+  width:53px;
+  height:53px;
+  border-radius:50%;
+  object-fit:cover
+}
+
+.chatInfo{
+  flex:1
+}
+
+.chatInfo b{
+  display:block
+}
+
+.chatInfo small{
+  color:#788396
+}
+
+.chatWindow{
+  position:fixed;
+  inset:0;
+  background:#f4f7fb;
+  z-index:500;
+  display:none;
+  flex-direction:column
+}
+
+.chatWindow.show{
+  display:flex
+}
+
+.chatTop{
+  height:65px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 15px;
+  box-shadow:0 2px 8px #ddd
+}
+
+.chatTop img{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover
+}
+
+.chatMessages{
+  flex:1;
+  overflow:auto;
+  padding:15px
+}
+
+.msg{
+  max-width:75%;
+  padding:10px 13px;
+  border-radius:15px;
+  margin-bottom:8px;
+  line-height:1.45
+}
+
+.msg.me{
+  margin-left:auto;
+  background:#1877f2;
+  color:#fff;
+  border-bottom-right-radius:4px
+}
+
+.msg.other{
+  background:#fff;
+  border-bottom-left-radius:4px
+}
+
+.chatInput{
+  background:#fff;
+  padding:10px;
+  display:flex;
+  gap:8px
+}
+
+.chatInput input{
+  flex:1;
+  border:0;
+  background:#f1f4f8;
+  border-radius:22px;
+  padding:11px 15px;
+  outline:0
+}
+
+.send{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:#1877f2;
+  color:#fff
+}
+
+/* STORY VIEW */
+
+.storyViewer{
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:1000;
+  display:none;
+  align-items:center;
+  justify-content:center
+}
+
+.storyViewer.show{
+  display:flex
+}
+
+.storyViewer img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain
+}
+
+.storyClose{
+  position:absolute;
+  top:20px;
+  right:20px;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:rgba(255,255,255,.15);
+  color:#fff;
+  font-size:28px;
+  z-index:2
+}
+
+.storyInfo{
+  position:absolute;
+  top:20px;
+  left:20px;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:10px
+}
+
+.storyInfo img{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover
+}
+
+/* STORY REACTIONS */
+
+.storyReactionPanel{
+  position:absolute;
+  left:50%;
+  bottom:24px;
+  transform:translateX(-50%);
+  width:min(92%,430px);
+  z-index:3;
+  text-align:center
+}
+
+.storyReactionButtons{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap
+}
+
+.storyReactionBtn{
+  border-radius:24px;
+  padding:10px 15px;
+  background:rgba(255,255,255,.94);
+  color:#182230;
+  font-weight:700;
+  box-shadow:0 4px 16px rgba(0,0,0,.2)
+}
+
+.storyReactionBtn.selected{
+  background:#1877f2;
+  color:#fff
+}
+
+.storyReactionCounts{
+  display:inline-flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:22px;
+  background:rgba(0,0,0,.62);
+  color:#fff;
+  font-weight:700
+}
+
+/* RESPONSIVE */
+
+@media(max-width:700px){
+
+  .top{
+    height:68px;
+    padding:0 10px;
+    gap:9px
+  }
+
+  .logo{
+    min-width:auto
+  }
+
+  .logoText{
+    font-size:23px
+  }
+
+  .logoSub{
+    display:none
+  }
+
+  .logoIcon{
+    width:43px;
+    height:36px;
+    font-size:20px
+  }
+
+  .search{
+    max-width:none;
+    height:40px
+  }
+
+  .topBtns .iconBtn{
+    display:none
+  }
+
+  .miniAvatar{
+    width:40px;
+    height:40px
+  }
+
+  .app{
+    margin:10px auto;
+    padding:0 8px
+  }
+
+  .composer{
+    padding:13px;
+    border-radius:17px
+  }
+
+  .composeActions{
+    grid-template-columns:repeat(4,1fr)
+  }
+
+  .composeAction{
+    font-size:12px
+  }
+
+  .actionIcon{
+    display:block;
+    margin:0 0 2px
+  }
+
+  .story{
+    flex-basis:125px;
+    height:180px
+  }
+
+  .post{
+    border-radius:16px
+  }
+
+  .postImage{
+    max-height:450px
+  }
+
+  .cover{
+    height:190px
+  }
+
+  .profileInfo{
+    padding:0 15px 18px
+  }
+
+  .stats{
+    grid-template-columns:repeat(4,1fr)
+  }
+
+  .profileTabs button{
+    font-size:11px
+  }
+}
+
+@media(max-width:420px){
+
+  .logoText{
+    font-size:20px
+  }
+
+  .search{
+    display:none
+  }
+
+  .composeInput{
+    font-size:13px
+  }
+
+  .filter{
+    min-width:100px
+  }
+
+  .postButtons button{
+    font-size:12px
+  }
+}
+
+.friendsTabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;background:#eaf2ff;padding:6px;border-radius:15px;margin:0 0 14px}
+.friendsTab{border:0;background:transparent;color:#516070;padding:10px 7px;border-radius:11px;font-weight:800;font-size:12px;cursor:pointer}
+.friendsTab.active{background:#1877f2;color:#fff;box-shadow:0 3px 10px rgba(24,119,242,.2)}
+.tabBadge{display:inline-flex;min-width:18px;height:18px;padding:0 5px;align-items:center;justify-content:center;border-radius:99px;background:#e9314e;color:#fff;font-size:10px;margin-left:3px}
+.notificationItem{display:flex;gap:11px;align-items:center;padding:13px;border-bottom:1px solid #edf1f6}
+.notificationItem:last-child{border-bottom:0}
+.notificationIcon{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#edf4ff;font-size:20px;flex:none}
+.notificationItem.unread{background:#f4f8ff}
+.notificationText{flex:1;min-width:0}.notificationText b{display:block}.notificationText small{color:#6b7785}
+.soundSettings{display:grid;gap:12px}
+.soundRow{background:#f7f9fc;border:1px solid #e5eaf1;border-radius:15px;padding:13px}
+.soundRowTop{display:flex;align-items:center;gap:10px}
+.soundRowTop b{flex:1}
+.soundRow select{width:100%;margin-top:9px;border:1px solid #dfe5ed;border-radius:10px;background:#fff;padding:10px;outline:0}
+.soundActions{display:flex;gap:7px;margin-top:9px}
+.soundActions button{padding:8px 11px;border-radius:10px;background:#e9f1ff;color:#1765d4;font-weight:700}
+.soundToggle{width:20px;height:20px;accent-color:#1877f2}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="top">
+
+  <div class="logo" onclick="showPage('home')">
+
+    <div class="logoIcon">•••</div>
+
+    <div>
+      <div class="logoText">We Chat</div>
+      <div class="logoSub">Connect · Share · Grow</div>
+    </div>
+
+  </div>
+
+  <div class="search">
+    🔎
+    <input
+      id="searchInput"
+      placeholder="Search We Chat..."
+      oninput="doSearch(this.value)"
+    >
+  </div>
+
+  <div class="topBtns">
+
+    <button
+      class="iconBtn"
+      onclick="showPage('notifications')"
+    >
+      🔔
+      <span
+        id="notificationBadge"
+        class="badge hidden"
+      >0</span>
+    </button>
+
+    <button
+      class="iconBtn"
+      onclick="showPage('chats')"
+    >
+      💬
+    </button>
+
+    <!-- PROFILE CLICK -->
+    <img
+      id="topAvatar"
+      class="miniAvatar"
+      onclick="viewProfile(window.me?.uid)"
+      src=""
+    >
+
+  </div>
+
+</header>
+
+
+<!-- APP -->
+
+<main
+  class="app"
+  id="app"
+></main>
+
+
+<!-- BOTTOM NAV
+     Profile option removed -->
+
+<nav class="bottom">
+
+  <button
+    class="navBtn active"
+    id="navHome"
+    onclick="showPage('home')"
+  >
+    <span>⌂</span>
+    <small>Home</small>
+  </button>
+
+  <button
+    class="navBtn"
+    id="navExplore"
+    onclick="showPage('explore')"
+  >
+    <span>⌕</span>
+    <small>Explore</small>
+  </button>
+
+  <button
+    class="navBtn"
+    id="navFriends"
+    onclick="showPage('friends')"
+  >
+    <span>👥</span>
+    <small>Friends</small>
+  </button>
+
+  <button
+    class="navBtn"
+    id="navChat"
+    onclick="showPage('chats')"
+  >
+    <span>💬</span>
+    <small>Chat</small>
+  </button>
+
+</nav>
+
+
+<!-- STORY GALLERY INPUT -->
+
+<input
+  id="storyFile"
+  type="file"
+  accept="image/*"
+  style="display:none"
+  onchange="uploadStory(event)"
+>
+
+
+<!-- POST MODAL -->
+
+<div
+  class="modal"
+  id="postModal"
+>
+
+  <div class="modalBox">
+
+    <div class="modalHead">
+
+      <h2>Create Post</h2>
+
+      <button
+        class="close"
+        onclick="closeModal('postModal')"
+      >×</button>
+
+    </div>
+
+    <div class="field">
+
+      <label>What’s on your mind?</label>
+
+      <textarea
+        id="postText"
+        placeholder="Write something..."
+      ></textarea>
+
+    </div>
+
+    <div class="field">
+
+      <label>Photo</label>
+
+      <input
+        id="postFile"
+        type="file"
+        accept="image/*"
+      >
+
+    </div>
+
+    <div class="field">
+
+      <label>Video URL (optional)</label>
+
+      <input
+        id="postVideo"
+        placeholder="Paste video URL..."
+      >
+
+    </div>
+
+    <button
+      class="primary"
+      onclick="createPost()"
+    >
+      Post
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- PROFILE EDIT -->
+
+<div
+  class="modal"
+  id="profileModal"
+>
+
+  <div class="modalBox">
+
+    <div class="modalHead">
+
+      <h2>Edit Profile</h2>
+
+      <button
+        class="close"
+        onclick="closeModal('profileModal')"
+      >×</button>
+
+    </div>
+
+    <div class="field">
+      <label>Name</label>
+      <input id="editName">
+    </div>
+
+    <div class="field">
+      <label>Username</label>
+      <input id="editUsername">
+    </div>
+
+    <div class="field">
+      <label>Bio</label>
+      <textarea id="editBio"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Location</label>
+      <input id="editLocation">
+    </div>
+
+    <div class="field">
+      <label>Profile Photo</label>
+      <input
+        id="profileFile"
+        type="file"
+        accept="image/*"
+      >
+    </div>
+
+    <div class="field">
+      <label>Cover Photo</label>
+      <input
+        id="coverFile"
+        type="file"
+        accept="image/*"
+      >
+    </div>
+
+    <button
+      class="primary"
+      onclick="saveProfile()"
+    >
+      Save Changes
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- SOUND SETTINGS -->
+
+<div
+  class="modal"
+  id="soundModal"
+>
+
+  <div class="modalBox">
+
+    <div class="modalHead">
+      <h2>🔊 Sound Settings</h2>
+      <button class="close" onclick="closeModal('soundModal')">×</button>
+    </div>
+
+    <p style="color:#687386;font-size:13px;margin:-8px 0 15px">
+      প্রতিটি event-এর জন্য sound আলাদা করে বেছে নিন।
+    </p>
+
+    <div class="soundSettings">
+
+      <div class="soundRow">
+        <div class="soundRowTop">
+          <input class="soundToggle" id="soundFriendEnabled" type="checkbox">
+          <b>👥 Friend Request</b>
+        </div>
+        <select id="soundFriendSelect">
+          <option value="ting">Soft Ting Ting</option>
+          <option value="doubleTing">Double Ting</option>
+          <option value="chime">Soft Chime</option>
+          <option value="beep">Beep</option>
+        </select>
+        <div class="soundActions">
+          <button type="button" onclick="testSound('friend')">▶ Test</button>
+        </div>
+      </div>
+
+      <div class="soundRow">
+        <div class="soundRowTop">
+          <input class="soundToggle" id="soundMessageEnabled" type="checkbox">
+          <b>💬 New Message</b>
+        </div>
+        <select id="soundMessageSelect">
+          <option value="beep2">Double Beep</option>
+          <option value="beep">Beep</option>
+          <option value="ting">Soft Ting Ting</option>
+          <option value="chime">Soft Chime</option>
+        </select>
+        <div class="soundActions">
+          <button type="button" onclick="testSound('message')">▶ Test</button>
+        </div>
+      </div>
+
+      <div class="soundRow">
+        <div class="soundRowTop">
+          <input class="soundToggle" id="soundNotificationEnabled" type="checkbox">
+          <b>🔔 Notifications</b>
+        </div>
+        <select id="soundNotificationSelect">
+          <option value="pop">Soft Pop</option>
+          <option value="chime">Soft Chime</option>
+          <option value="doubleTing">Double Ting</option>
+          <option value="beep">Beep</option>
+        </select>
+        <div class="soundActions">
+          <button type="button" onclick="testSound('notification')">▶ Test</button>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="primary" style="margin-top:15px" onclick="saveSoundSettings()">
+      Save Sound Settings
+    </button>
+
+    <button class="secondary" onclick="closeModal('soundModal')">
+      Close
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- CHAT WINDOW -->
+
+<div
+  class="chatWindow"
+  id="chatWindow"
+>
+
+  <div class="chatTop">
+
+    <button
+      class="iconBtn"
+      onclick="closeChat()"
+    >
+      ‹
+    </button>
+
+    <img
+      id="chatAvatar"
+      src=""
+    >
+
+    <div>
+      <b id="chatName">Chat</b>
+      <small id="chatStatus">We Chat</small>
+    </div>
+
+  </div>
+
+  <div
+    class="chatMessages"
+    id="chatMessages"
+  ></div>
+
+  <div class="chatInput">
+
+    <input
+      id="messageInput"
+      placeholder="Write a message..."
+      onkeydown="if(event.key==='Enter')sendMessage()"
+    >
+
+    <button
+      class="send"
+      onclick="sendMessage()"
+    >
+      ➤
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- STORY VIEWER -->
+
+<div
+  class="storyViewer"
+  id="storyViewer"
+>
+
+  <div
+    class="storyInfo"
+    id="storyInfo"
+  ></div>
+
+  <button
+    class="storyClose"
+    onclick="closeStory()"
+  >
+    ×
+  </button>
+
+  <img
+    id="storyViewerImage"
+    src=""
+  >
+
+</div>
+
+
+<script type="module">
+
+import {
+  initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  collection,
+  doc,
+  addDoc,
+  setDoc,
+  updateDoc,
+  deleteDoc,
+  getDoc,
+  onSnapshot,
+  query,
+  orderBy,
+  limit,
+  serverTimestamp,
+  where
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig={
+
+  apiKey:
+  "AIzaSyBmKpssMcKfyOLbG3txX-tlbMsHnS6791U",
+
+  authDomain:
+  "my-chat-479.firebaseapp.com",
+
+  projectId:
+  "my-chat-479",
+
+  storageBucket:
+  "my-chat-479.firebasestorage.app",
+
+  messagingSenderId:
+  "790962179810",
+
+  appId:
+  "1:790962179810:web:3d3d010d92cd4f331958bb",
+
+  measurementId:
+  "G-QW1GQGSR5L"
+};
+
+
+const firebaseApp=initializeApp(firebaseConfig);
+
+const auth=getAuth(firebaseApp);
+
+const db=getFirestore(firebaseApp);
+
+
+/* STATE */
+
+let me=null;
+
+let myUser=null;
+
+let users={};
+
+let posts=[];
+
+let friends=[];
+
+let requests=[];
+let outgoingRequests=[];
+
+let messages=[];
+
+let stories=[];
+let storyReactions=[];
+
+let savedPosts=[];
+let notifications=[];
+let friendsTab="friends";
+let notificationSeenIds=new Set();
+
+let soundRequestSeenIds=new Set();
+let soundMessageSeenIds=new Set();
+let soundNotificationSeenIds=new Set();
+let soundRequestInitialized=false;
+let soundMessageInitialized=false;
+let soundNotificationInitialized=false;
+let soundAudioContext=null;
+
+const SOUND_DEFAULTS={
+  friend:{enabled:true,sound:"ting"},
+  message:{enabled:true,sound:"beep2"},
+  notification:{enabled:true,sound:"pop"}
+};
+
+function getSoundSettings(){
+  try{
+    const raw=localStorage.getItem("weChatSoundSettings");
+    const saved=raw?JSON.parse(raw):{};
+    return {
+      friend:{...SOUND_DEFAULTS.friend,...(saved.friend||{})},
+      message:{...SOUND_DEFAULTS.message,...(saved.message||{})},
+      notification:{...SOUND_DEFAULTS.notification,...(saved.notification||{})}
+    };
+  }catch{
+    return JSON.parse(JSON.stringify(SOUND_DEFAULTS));
+  }
+}
+
+function saveSoundSettingsLocal(settings){
+  try{localStorage.setItem("weChatSoundSettings",JSON.stringify(settings));}catch{}
+}
+
+function getAudioContext(){
+  try{
+    if(!soundAudioContext){
+      const AC=window.AudioContext||window.webkitAudioContext;
+      if(!AC) return null;
+      soundAudioContext=new AC();
+    }
+    if(soundAudioContext.state==="suspended") soundAudioContext.resume().catch(()=>{});
+    return soundAudioContext;
+  }catch{return null;}
+}
+
+function tone(ctx,frequency,start,duration,type="sine",volume=.055){
+  const osc=ctx.createOscillator();
+  const gain=ctx.createGain();
+  osc.type=type;
+  osc.frequency.setValueAtTime(frequency,start);
+  gain.gain.setValueAtTime(0.0001,start);
+  gain.gain.exponentialRampToValueAtTime(volume,start+.018);
+  gain.gain.exponentialRampToValueAtTime(0.0001,start+duration);
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start(start);
+  osc.stop(start+duration+.03);
+}
+
+function playPreset(name){
+  const ctx=getAudioContext();
+  if(!ctx) return;
+  const t=ctx.currentTime+.01;
+  if(name==="ting"){ tone(ctx,880,t,.16,"sine",.06); tone(ctx,1320,t+.12,.22,"sine",.045); }
+  else if(name==="doubleTing"){ tone(ctx,880,t,.14,"sine",.055); tone(ctx,1100,t+.18,.16,"sine",.05); }
+  else if(name==="beep"){ tone(ctx,620,t,.16,"square",.035); }
+  else if(name==="beep2"){ tone(ctx,620,t,.12,"square",.035); tone(ctx,780,t+.17,.14,"square",.03); }
+  else if(name==="chime"){ tone(ctx,740,t,.18,"sine",.045); tone(ctx,988,t+.14,.28,"sine",.04); }
+  else if(name==="pop"){ tone(ctx,520,t,.08,"sine",.055); tone(ctx,820,t+.06,.12,"sine",.045); }
+}
+
+function playEventSound(type){
+  const settings=getSoundSettings();
+  const item=settings[type];
+  if(item?.enabled) playPreset(item.sound);
+}
+
+window.openSoundSettings=function(){
+  const s=getSoundSettings();
+  document.getElementById("soundFriendEnabled").checked=!!s.friend.enabled;
+  document.getElementById("soundFriendSelect").value=s.friend.sound;
+  document.getElementById("soundMessageEnabled").checked=!!s.message.enabled;
+  document.getElementById("soundMessageSelect").value=s.message.sound;
+  document.getElementById("soundNotificationEnabled").checked=!!s.notification.enabled;
+  document.getElementById("soundNotificationSelect").value=s.notification.sound;
+  document.getElementById("soundModal").classList.add("show");
+  getAudioContext();
+};
+
+window.saveSoundSettings=function(){
+  const settings={
+    friend:{enabled:document.getElementById("soundFriendEnabled").checked,sound:document.getElementById("soundFriendSelect").value},
+    message:{enabled:document.getElementById("soundMessageEnabled").checked,sound:document.getElementById("soundMessageSelect").value},
+    notification:{enabled:document.getElementById("soundNotificationEnabled").checked,sound:document.getElementById("soundNotificationSelect").value}
+  };
+  saveSoundSettingsLocal(settings);
+  playPreset("pop");
+  alert("Sound settings saved!");
+  closeModal("soundModal");
+};
+
+window.testSound=function(type){
+  const map={
+    friend:["soundFriendEnabled","soundFriendSelect"],
+    message:["soundMessageEnabled","soundMessageSelect"],
+    notification:["soundNotificationEnabled","soundNotificationSelect"]
+  };
+  const pair=map[type];
+  if(!pair) return;
+  const enabled=document.getElementById(pair[0]).checked;
+  const sound=document.getElementById(pair[1]).value;
+  if(enabled) playPreset(sound);
+};
+
+let currentChat=null;
+
+let currentPage="home";
+
+let stopFns=[];
+
+
+/* DEFAULT AVATAR */
+
+const defaultAvatar=
+"data:image/svg+xml;charset=UTF-8,"+
+encodeURIComponent(`
+<svg xmlns="http://www.w3.org/2000/svg"
+width="300" height="300">
+<rect width="300" height="300" fill="#e8eef6"/>
+<circle cx="150" cy="110" r="62" fill="#9aa9bd"/>
+<circle cx="150" cy="310" r="105" fill="#9aa9bd"/>
+</svg>
+`);
+
+
+/* AUTH */
+
+onAuthStateChanged(auth,async user=>{
+
+  if(!user){
+
+    me=null;
+    window.me=null;
+    showLoginMessage();
+
+    return;
+
+  }
+
+  me=user;
+  window.me=user;
+  window.currentUser=user;
+
+  document.querySelector(".bottom").style.display="grid";
+
+  await ensureUser();
+
+  startListeners();
+
+  showPage("home");
+
+});
+
+
+/* LOGIN MESSAGE */
+
+function showLoginMessage(){
+
+  document.querySelector(".bottom").style.display="none";
+
+  document.getElementById("app").innerHTML=`
+
+    <div class="post"
+      style="
+      padding:35px;
+      text-align:center;
+      margin-top:50px;
+      "
+    >
+
+      <div
+        class="logoIcon"
+        style="margin:auto"
+      >
+        •••
+      </div>
+
+      <h2 style="margin-top:15px">
+        We Chat
+      </h2>
+
+      <p style="
+        color:#687386;
+        margin-top:8px
+      ">
+        Please sign in first.
+      </p>
+
+    </div>
+
+  `;
+
+}
+
+
+/* USER */
+
+async function ensureUser(){
+
+  const ref=doc(
+    db,
+    "users",
+    me.uid
+  );
+
+  const snap=await getDoc(ref);
+
+  if(!snap.exists()){
+
+    await setDoc(ref,{
+
+      uid:me.uid,
+
+      name:
+      me.displayName ||
+      "We Chat User",
+
+      username:
+      "user_"+me.uid.slice(0,6),
+
+      email:
+      me.email || "",
+
+      photoURL:
+      me.photoURL ||
+      defaultAvatar,
+
+      coverURL:"",
+
+      bio:"",
+
+      location:"",
+
+      online:true,
+
+      joinedAt:
+      serverTimestamp()
+
+    });
+
+  }else{
+
+    await updateDoc(ref,{
+      online:true
+    });
+
+  }
+
+}
+
+
+/* LISTENERS */
+
+function startListeners(){
+
+  stopFns.forEach(
+    fn=>fn && fn()
+  );
+
+  stopFns=[];
+
+
+  /* USERS */
+
+  stopFns.push(
+
+    onSnapshot(
+      collection(db,"users"),
+
+      snap=>{
+
+        users={};
+
+        snap.forEach(d=>{
+
+          users[d.id]={
+            uid:d.id,
+            ...d.data()
+          };
+
+        });
+
+        myUser=
+        users[me.uid] ||
+        myUser;
+
+        updateTop();
+
+        if(currentPage==="profile"){
+          viewProfile(window.me?.uid);
+        }
+
+      }
+
+    )
+
+  );
+
+
+  /* POSTS */
+
+  stopFns.push(
+
+    onSnapshot(
+
+      query(
+        collection(db,"posts"),
+        orderBy("createdAt","desc"),
+        limit(50)
+      ),
+
+      snap=>{
+
+        posts=[];
+
+        snap.forEach(d=>{
+
+          posts.push({
+            id:d.id,
+            ...d.data()
+          });
+
+        });
+
+        if(
+          currentPage==="home" ||
+          currentPage==="explore"
+        ){
+
+          renderCurrent();
+
+        }
+
+      }
+
+    )
+
+  );
+
+
+  /* FRIEND REQUESTS */
+
+  stopFns.push(
+
+    onSnapshot(
+      collection(db,"friendRequests"),
+
+      snap=>{
+
+        requests=[];
+        outgoingRequests=[];
+
+        snap.forEach(d=>{
+
+          const x={
+            id:d.id,
+            ...d.data()
+          };
+
+          if(x.to===me.uid){
+            requests.push(x);
+          }
+          if(x.from===me.uid){
+            outgoingRequests.push(x);
+          }
+
+        });
+
+        if(soundRequestInitialized){
+          const newIncoming=requests.filter(r=>!soundRequestSeenIds.has(r.id));
+          newIncoming.forEach(()=>playEventSound("friend"));
+        }
+        soundRequestSeenIds=new Set(requests.map(r=>r.id));
+        soundRequestInitialized=true;
+
+        updateRequestBadge();
+
+        if(currentPage==="requests" || currentPage==="friends"){
+          renderCurrent();
+        }
+
+      }
+
+    )
+
+  );
+
+
+  /* NOTIFICATIONS */
+
+  stopFns.push(
+    onSnapshot(
+      collection(db,"notifications"),
+      snap=>{
+        notifications=[];
+        snap.forEach(d=>{
+          const x={id:d.id,...d.data()};
+          if(x.to===me.uid) notifications.push(x);
+        });
+        notifications.sort((a,b)=>{
+          const at=a.createdAt?.toMillis ? a.createdAt.toMillis() : (a.createdAt || 0);
+          const bt=b.createdAt?.toMillis ? b.createdAt.toMillis() : (b.createdAt || 0);
+          return bt-at;
+        });
+        notifications=notifications.slice(0,100);
+        if(soundNotificationInitialized){
+          const newNotifications=notifications.filter(n=>!soundNotificationSeenIds.has(n.id) && n.type!=="friend_request");
+          newNotifications.forEach(()=>playEventSound("notification"));
+        }
+        soundNotificationSeenIds=new Set(notifications.map(n=>n.id));
+        soundNotificationInitialized=true;
+        updateNotificationBadge();
+        if(currentPage==="notifications") renderNotifications();
+      },
+      error=>{
+        console.error("Notification listener:",error);
+      }
+    )
+  );
+
+
+  /* FRIENDS */
+
+  stopFns.push(
+
+    onSnapshot(
+      collection(db,"friends"),
+
+      snap=>{
+
+        friends=[];
+
+        snap.forEach(d=>{
+
+          const x={
+            id:d.id,
+            ...d.data()
+          };
+
+          if(
+            x.from===me.uid ||
+            x.to===me.uid
+          ){
+
+            friends.push(x);
+
+          }
+
+        });
+
+        if(currentPage==="friends"){
+          renderFriends();
+        }
+
+      }
+
+    )
+
+  );
+
+
+  /* MESSAGES */
+
+  stopFns.push(
+
+    onSnapshot(
+
+      query(
+        collection(db,"messages"),
+        orderBy("createdAt","asc"),
+        limit(300)
+      ),
+
+      snap=>{
+
+        messages=[];
+
+        snap.forEach(d=>{
+
+          const x={
+            id:d.id,
+            ...d.data()
+          };
+
+          if(
+            x.from===me.uid ||
+            x.to===me.uid
+          ){
+
+            messages.push(x);
+
+          }
+
+        });
+
+        if(soundMessageInitialized){
+          const newIncoming=messages.filter(m=>m.to===me.uid && !soundMessageSeenIds.has(m.id));
+          newIncoming.forEach(m=>{
+            if(currentChat!==m.from) playEventSound("message");
+          });
+        }
+        soundMessageSeenIds=new Set(messages.map(m=>m.id));
+        soundMessageInitialized=true;
+
+        if(currentChat){
+          renderChatMessages();
+        }
+
+      }
+
+    )
+
+  );
+
+
+  /* STORIES */
+
+  stopFns.push(
+
+    onSnapshot(
+      collection(db,"stories"),
+
+      async snap=>{
+
+        stories=[];
+
+        const now=Date.now();
+
+        const expired=[];
+
+        snap.forEach(d=>{
+
+          const x={
+            id:d.id,
+            ...d.data()
+          };
+
+          if(
+            x.expiresAt &&
+            x.expiresAt>now
+          ){
+
+            stories.push(x);
+
+          }else if(
+            x.expiresAt &&
+            x.expiresAt<=now
+          ){
+
+            expired.push(x);
+
+          }
+
+        });
+
+
+        /* DELETE EXPIRED */
+
+        for(
+          const story of expired
+        ){
+
+          try{
+
+            await deleteDoc(
+              doc(
+                db,
+                "stories",
+                story.id
+              )
+            );
+
+          }catch(error){
+
+            console.log(
+              "Expired story:",
+              error
+            );
+
+          }
+
+        }
+
+
+        if(currentPage==="home"){
+          renderCurrent();
+        }
+
+      }
+
+    )
+
+  );
+
+
+  /* SAVED POSTS */
+
+  stopFns.push(
+
+    onSnapshot(
+      collection(db,"savedPosts"),
+
+      snap=>{
+
+        savedPosts=[];
+
+        snap.forEach(d=>{
+
+          const x={
+            id:d.id,
+            ...d.data()
+          };
+
+          if(x.uid===me.uid){
+            savedPosts.push(x.postId);
+          }
+
+        });
+
+      }
+
+    )
+
+  );
+
+}
+
+
+/* TOP */
+
+function updateTop(){
+
+  const img=
+  document.getElementById("topAvatar");
+
+  if(img){
+
+    img.src=
+    myUser?.photoURL ||
+    defaultAvatar;
+
+  }
+
+}
+
+
+/* PAGE */
+
+window.showPage=function(page){
+
+  currentPage=page;
+
+  updateNav(page);
+
+  renderCurrent();
+
+  if(page==="notifications") markNotificationsRead();
+
+};
+
+
+function updateNav(page){
+
+  document
+  .querySelectorAll(".navBtn")
+  .forEach(x=>{
+    x.classList.remove("active");
+  });
+
+
+  if(page==="home")
+    document
+    .getElementById("navHome")
+    ?.classList.add("active");
+
+
+  if(page==="explore")
+    document
+    .getElementById("navExplore")
+    ?.classList.add("active");
+
+
+  if(page==="chats")
+    document
+    .getElementById("navChat")
+    ?.classList.add("active");
+
+
+  if(page==="friends")
+    document
+    .getElementById("navFriends")
+    ?.classList.add("active");
+
+}
+
+
+/* RENDER CURRENT */
+
+function renderCurrent(){
+
+  if(currentPage==="home"){
+    renderHome();
+    return;
+  }
+
+  if(currentPage==="explore"){
+    renderExplore();
+    return;
+  }
+
+  if(currentPage==="requests"){
+    renderRequests();
+    return;
+  }
+
+  if(currentPage==="notifications"){
+    renderNotifications();
+    return;
+  }
+
+  if(currentPage==="friends"){
+    renderFriends();
+    return;
+  }
+
+  if(currentPage==="chats"){
+    renderChats();
+    return;
+  }
+
+}
+
+
+/* HOME */
+
+function renderHome(){
+
+  const avatar=
+  myUser?.photoURL ||
+  defaultAvatar;
+
+
+  document.getElementById("app").innerHTML=`
+
+    <section class="composer">
+
+      <div class="composeTop">
+
+        <!-- PROFILE CLICK -->
+
+        <img
+          class="composeAvatar"
+          src="${avatar}"
+          onclick="viewProfile(window.me?.uid)"
+        >
+
+        <div
+          class="composeInput"
+          onclick="openPost()"
+        >
+
+          What’s on your mind,
+          ${esc(myUser?.name || "Friend")}?
+
+          <span
+            style="margin-left:auto;font-size:22px"
+          >
+            ☺
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="composeActions">
+
+        <button
+          class="composeAction"
+          onclick="openPost('post')"
+        >
+          <span class="actionIcon red">
+            📝
+          </span>
+          Post
+        </button>
+
+
+        <button
+          class="composeAction"
+          onclick="openPost('photo')"
+        >
+          <span class="actionIcon green">
+            ▣
+          </span>
+          Photo
+        </button>
+
+
+        <button
+          class="composeAction"
+          onclick="openPost('video')"
+        >
+          <span class="actionIcon purple">
+            ▶
+          </span>
+          Video
+        </button>
+
+
+        <button
+          class="composeAction"
+          onclick="openPost('feeling')"
+        >
+          <span class="actionIcon orange">
+            ☺
+          </span>
+          Feeling
+        </button>
+
+      </div>
+
+    </section>
+
+
+    ${renderStories()}
+
+
+    <div class="filters">
+
+      <button
+        class="filter active"
+        onclick="showPage('home')"
+      >
+        🏠 For You
+      </button>
+
+      <button
+        class="filter"
+        onclick="showPage('friends')"
+      >
+        👥 Friends
+      </button>
+
+      <button
+        class="filter"
+        onclick="showPage('explore')"
+      >
+        🧭 Explore
+      </button>
+
+    </div>
+
+
+    <section id="feed">
+
+      ${renderPosts(posts)}
+
+    </section>
+
+  `;
+
+}
+
+
+/* STORIES */
+
+function renderStories(){
+
+  const now=Date.now();
+
+
+  const active=
+  stories
+  .filter(
+    s=>
+    s.imageURL &&
+    s.expiresAt &&
+    s.expiresAt>now
+  )
+  .sort(
+    (a,b)=>
+    (b.createdAt?.seconds || 0)-
+    (a.createdAt?.seconds || 0)
+  );
+
+
+  const grouped=[];
+
+  const used=new Set();
+
+
+  active.forEach(story=>{
+
+    if(used.has(story.uid))
+      return;
+
+    const user=users[story.uid];
+
+    if(!user)
+      return;
+
+    grouped.push({
+      story,
+      user
+    });
+
+    used.add(story.uid);
+
+  });
+
+
+  return `
+
+    <section class="stories">
+
+      <div class="storyRow">
+
+
+        <!-- CREATE STORY -->
+
+        <div
+          class="story createStory"
+          onclick="createStory()"
+        >
+
+          <div class="plusCircle">
+            +
+          </div>
+
+          <b>
+            Create Story
+          </b>
+
+        </div>
+
+
+        ${grouped.map(x=>`
+
+          <div
+            class="story"
+            onclick="viewStory('${x.story.id}')"
+          >
+
+            <img
+              src="${x.story.imageURL}"
+            >
+
+            <div class="storyShade"></div>
+
+            <img
+              class="storyAvatar"
+              src="${
+                x.user.photoURL ||
+                defaultAvatar
+              }"
+            >
+
+            <div class="storyName">
+              ${esc(
+                x.user.name ||
+                "User"
+              )}
+            </div>
+
+          </div>
+
+        `).join("")}
+
+
+      </div>
+
+    </section>
+
+  `;
+
+}
+
+
+/* CREATE STORY */
+
+window.createStory=function(){
+
+  if(!me)
+    return;
+
+  const input=
+  document.getElementById("storyFile");
+
+  input.value="";
+
+  input.click();
+
+};
+
+
+/* UPLOAD STORY */
+
+window.uploadStory=async function(event){
+
+  const file=
+  event.target.files?.[0];
+
+  if(!file)
+    return;
+
+
+  if(!file.type.startsWith("image/")){
+
+    alert(
+      "শুধু ছবি নির্বাচন করুন।"
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    const imageURL=
+    await resizeImage(
+      file,
+      800,
+      .55
+    );
+
+
+    const createdAt=
+    Date.now();
+
+
+    const expiresAt=
+    createdAt+
+    24*60*60*1000;
+
+
+    await addDoc(
+      collection(db,"stories"),
+      {
+
+        uid:me.uid,
+
+        imageURL,
+
+        createdAt:
+
+          serverTimestamp(),
+
+        expiresAt
+
+      }
+    );
+
+
+    alert(
+      "Story added successfully!"
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Story upload করা যায়নি।"
+    );
+
+  }
+
+};
+
+
+/* STORY REACTIONS */
+
+window.currentStoryId=null;
+
+window.reactToStory=async function(storyId,type){
+
+  if(!me || !storyId || !type)
+    return;
+
+  const allowed=["heart","sad","laugh"];
+
+  if(!allowed.includes(type))
+    return;
+
+  const story=stories.find(s=>s.id===storyId);
+
+  if(!story)
+    return;
+
+  try{
+
+    await setDoc(
+      doc(db,"storyReactions",`${storyId}_${me.uid}`),
+      {
+        storyId,
+        storyOwnerUid:story.uid,
+        uid:me.uid,
+        type,
+        createdAt:serverTimestamp()
+      }
+    );
+
+    await createNotification(
+      story.uid,
+      "story_reaction",
+      me.uid,
+      `reacted ${type} to your story`,
+      {storyId}
+    );
+
+    renderStoryReactionPanel(storyId);
+
+  }catch(error){
+
+    console.error(error);
+    alert("Reaction দেওয়া যায়নি।");
+
+  }
+
+};
+
+
+function renderStoryReactionPanel(storyId){
+
+  const panel=document.getElementById("storyReactionPanel");
+
+  if(!panel)
+    return;
+
+  const story=stories.find(s=>s.id===storyId);
+
+  if(!story || !me){
+    panel.innerHTML="";
+    return;
+  }
+
+  const mine=storyReactions.find(
+    r=>r.storyId===storyId && r.uid===me.uid
+  );
+
+  if(story.uid===me.uid){
+
+    const own=storyReactions.filter(
+      r=>r.storyId===storyId
+    );
+
+    const heart=own.filter(r=>r.type==="heart").length;
+    const sad=own.filter(r=>r.type==="sad").length;
+    const laugh=own.filter(r=>r.type==="laugh").length;
+
+    panel.innerHTML=`
+      <div class="storyReactionCounts">
+        ❤️ ${heart}
+        <span>😢 ${sad}</span>
+        <span>😂 ${laugh}</span>
+      </div>
+    `;
+
+    return;
+  }
+
+  panel.innerHTML=`
+    <div class="storyReactionButtons">
+      <button
+        class="storyReactionBtn ${mine?.type==="heart" ? "selected" : ""}"
+        onclick="reactToStory('${storyId}','heart')"
+      >❤️ সুন্দর</button>
+
+      <button
+        class="storyReactionBtn ${mine?.type==="sad" ? "selected" : ""}"
+        onclick="reactToStory('${storyId}','sad')"
+      >😢 Sad</button>
+
+      <button
+        class="storyReactionBtn ${mine?.type==="laugh" ? "selected" : ""}"
+        onclick="reactToStory('${storyId}','laugh')"
+      >😂 হাসি</button>
+    </div>
+  `;
+
+}
+
+
+/* VIEW STORY */
+
+window.viewStory=function(id){
+
+  const story=stories.find(
+    s=>s.id===id
+  );
+
+  if(!story)
+    return;
+
+  if(
+    !story.expiresAt ||
+    story.expiresAt<=Date.now()
+  ){
+
+    cleanupStory(id);
+    return;
+
+  }
+
+  const user=users[story.uid];
+
+  window.currentStoryId=id;
+
+  document
+  .getElementById("storyViewerImage")
+  .src=story.imageURL;
+
+  document
+  .getElementById("storyInfo")
+  .innerHTML=`
+    <img
+      src="${
+        user?.photoURL ||
+        defaultAvatar
+      }"
+    >
+
+    <b>
+      ${esc(
+        user?.name ||
+        "User"
+      )}
+    </b>
+  `;
+
+  document
+  .getElementById("storyViewer")
+  .classList.add("show");
+
+  renderStoryReactionPanel(id);
+
+};
+
+
+window.closeStory=function(){
+
+  document
+  .getElementById("storyViewer")
+  .classList.remove("show");
+
+  window.currentStoryId=null;
+
+  const panel=document.getElementById("storyReactionPanel");
+
+  if(panel)
+    panel.innerHTML="";
+
+};
+
+
+async function cleanupStory(id){
+
+  try{
+
+    await deleteDoc(
+      doc(db,"stories",id)
+    );
+
+  }catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+
+/* POSTS */
+
+function renderPosts(list){
+
+  if(!list.length){
+
+    return `
+
+      <div
+        class="post"
+        style="
+        padding:35px;
+        text-align:center;
+        color:#748095
+        "
+      >
+        No posts yet.
+      </div>
+
+    `;
+
+  }
+
+
+  return list.map(p=>{
+
+    const u=
+    users[p.uid] ||
+    {
+      name:"We Chat User",
+      photoURL:defaultAvatar
+    };
+
+
+    const liked=
+    (p.likes || [])
+    .includes(me.uid);
+
+
+    const saved=
+    savedPosts.includes(p.id);
+
+
+    const comments=
+    p.comments || [];
+
+
+    return `
+
+      <article class="post">
+
+        <div class="postHead">
+
+          <img
+            class="postAvatar"
+            src="${
+              u.photoURL ||
+              defaultAvatar
+            }"
+            onclick="viewProfile('${p.uid}')"
+          >
+
+
+          <div class="postUser">
+
+            <b
+              onclick="viewProfile('${p.uid}')"
+            >
+              ${esc(
+                u.name ||
+                "User"
+              )}
+            </b>
+
+            <div class="postMeta">
+
+              ${timeAgo(p.createdAt)}
+              · 🌐 Public
+
+            </div>
+
+          </div>
+
+
+          <button
+            class="more"
+            onclick="postMenu('${p.id}')"
+          >
+            •••
+          </button>
+
+        </div>
+
+
+        ${
+          p.text
+          ?
+          `
+          <div class="postText">
+            ${esc(p.text)}
+          </div>
+          `
+          :
+          ""
+        }
+
+
+        ${
+          p.imageURL
+          ?
+          `
+          <img
+            class="postImage"
+            src="${p.imageURL}"
+          >
+          `
+          :
+          ""
+        }
+
+
+        ${
+          p.videoURL
+          ?
+          `
+          <video
+            class="postVideo"
+            controls
+            playsinline
+            src="${esc(p.videoURL)}"
+          ></video>
+          `
+          :
+          ""
+        }
+
+
+        <div class="postStats">
+
+          <span>
+
+            ${
+              liked
+              ?
+              "❤️"
+              :
+              "👍"
+            }
+
+            ${p.likes?.length || 0}
+
+          </span>
+
+
+          <span>
+
+            ${comments.length}
+            comments
+
+          </span>
+
+        </div>
+
+
+        <div class="postButtons">
+
+          <button
+            class="${
+              liked
+              ?
+              "liked"
+              :
+              ""
+            }"
+            onclick="likePost('${p.id}')"
+          >
+
+            ${
+              liked
+              ?
+              "❤️ Liked"
+              :
+              "♡ Like"
+            }
+
+          </button>
+
+
+          <button
+            onclick="toggleComments('${p.id}')"
+          >
+            💬 Comment
+          </button>
+
+
+          <button
+            onclick="sharePost('${p.id}')"
+          >
+            ↗ Share
+          </button>
+
+
+          <button
+            class="${
+              saved
+              ?
+              "saved"
+              :
+              ""
+            }"
+            onclick="savePost('${p.id}')"
+          >
+
+            ${
+              saved
+              ?
+              "🔖 Saved"
+              :
+              "🔖 Save"
+            }
+
+          </button>
+
+        </div>
+
+
+        <div
+          id="comments-${p.id}"
+          class="hidden"
+        >
+
+          <div class="comments">
+
+            ${comments.map(c=>{
+
+              const cu=
+              users[c.uid] ||
+              {
+                name:"User",
+                photoURL:
+                defaultAvatar
+              };
+
+              return `
+
+                <div class="comment">
+
+                  <img
+                    src="${
+                      cu.photoURL ||
+                      defaultAvatar
+                    }"
+                  >
+
+                  <div class="commentText">
+
+                    <b>
+                      ${esc(
+                        cu.name ||
+                        "User"
+                      )}
+                    </b>
+
+                    <br>
+
+                    ${esc(c.text)}
+
+                  </div>
+
+                </div>
+
+              `;
+
+            }).join("")}
+
+          </div>
+
+
+          <div class="commentBox">
+
+            <input
+              id="commentInput-${p.id}"
+              placeholder="Write a comment..."
+            >
+
+            <button
+              onclick="addComment('${p.id}')"
+            >
+              ➤
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    `;
+
+  }).join("");
+
+}
+
+
+/* POST MODAL */
+
+window.openPost=function(type=""){
+
+  document
+  .getElementById("postModal")
+  .classList.add("show");
+
+
+  const file=
+  document.getElementById("postFile");
+
+
+  if(type==="photo"){
+
+    setTimeout(()=>{
+      file.click();
+    },150);
+
+  }
+
+
+  if(type==="video"){
+
+    document
+    .getElementById("postVideo")
+    .focus();
+
+  }
+
+
+  if(type==="feeling"){
+
+    document
+    .getElementById("postText")
+    .value="😊 Feeling good!";
+
+  }
+
+};
+
+
+/* CREATE POST */
+
+window.createPost=async function(){
+
+  const text=
+  document
+  .getElementById("postText")
+  .value
+  .trim();
+
+
+  const file=
+  document
+  .getElementById("postFile")
+  .files[0];
+
+
+  const videoURL=
+  document
+  .getElementById("postVideo")
+  .value
+  .trim();
+
+
+  if(!text && !file && !videoURL){
+
+    alert(
+      "কিছু লিখুন অথবা ছবি/ভিডিও দিন।"
+    );
+
+    return;
+
+  }
+
+
+  let imageURL="";
+
+
+  if(file){
+
+    imageURL=
+    await resizeImage(
+      file,
+      1000,
+      .55
+    );
+
+  }
+
+
+  await addDoc(
+    collection(db,"posts"),
+    {
+
+      uid:me.uid,
+
+      text,
+
+      imageURL,
+
+      videoURL,
+
+      likes:[],
+
+      comments:[],
+
+      createdAt:
+      serverTimestamp()
+
+    }
+  );
+
+
+  document
+  .getElementById("postText")
+  .value="";
+
+
+  document
+  .getElementById("postFile")
+  .value="";
+
+
+  document
+  .getElementById("postVideo")
+  .value="";
+
+
+  closeModal("postModal");
+
+};
+
+
+/* LIKE */
+
+window.likePost=async function(id){
+
+  const ref=
+  doc(db,"posts",id);
+
+  const snap=
+  await getDoc(ref);
+
+
+  if(!snap.exists())
+    return;
+
+
+  const data=snap.data();
+
+  let likes=
+  data.likes || [];
+
+  const wasLiked=likes.includes(me.uid);
+
+  if(wasLiked){
+
+    likes=
+    likes.filter(
+      x=>x!==me.uid
+    );
+
+  }else{
+
+    likes.push(me.uid);
+
+  }
+
+
+  await updateDoc(
+    ref,
+    {likes}
+  );
+
+  if(!wasLiked){
+    await createNotification(
+      data.uid,
+      "post_like",
+      me.uid,
+      "liked your post",
+      {postId:id}
+    );
+  }
+
+};
+
+
+/* COMMENTS */
+
+window.toggleComments=function(id){
+
+  const el=
+  document
+  .getElementById(
+    "comments-"+id
+  );
+
+  if(el)
+    el.classList.toggle("hidden");
+
+};
+
+
+window.addComment=async function(id){
+
+  const input=
+  document
+  .getElementById(
+    "commentInput-"+id
+  );
+
+
+  const text=
+  input.value.trim();
+
+
+  if(!text)
+    return;
+
+
+  const ref=
+  doc(db,"posts",id);
+
+  const snap=
+  await getDoc(ref);
+
+
+  if(!snap.exists())
+    return;
+
+
+  const comments=
+  snap.data().comments || [];
+
+
+  comments.push({
+
+    uid:me.uid,
+
+    text,
+
+    createdAt:
+    Date.now()
+
+  });
+
+
+  await updateDoc(
+    ref,
+    {comments}
+  );
+
+  await createNotification(
+    snap.data().uid,
+    "post_comment",
+    me.uid,
+    "commented on your post",
+    {postId:id}
+  );
+
+  input.value="";
+
+};
+
+
+/* SHARE */
+
+window.sharePost=async function(id){
+
+  const url=
+  location.origin+
+  location.pathname+
+  "?post="+
+  encodeURIComponent(id);
+
+
+  if(
+    navigator.share
+  ){
+
+    try{
+
+      await navigator.share({
+        title:"We Chat Post",
+        url
+      });
+
+      return;
+
+    }catch{}
+
+  }
+
+
+  try{
+
+    await navigator.clipboard
+    .writeText(url);
+
+    alert(
+      "Post link copied!"
+    );
+
+  }catch{
+
+    prompt(
+      "Copy this link:",
+      url
+    );
+
+  }
+
+};
+
+
+/* SAVE */
+
+window.savePost=async function(id){
+
+  const existing=
+  savedPosts.includes(id);
+
+
+  const saveId=
+  me.uid+"_"+id;
+
+
+  if(existing){
+
+    await deleteDoc(
+      doc(
+        db,
+        "savedPosts",
+        saveId
+      )
+    );
+
+  }else{
+
+    await setDoc(
+      doc(
+        db,
+        "savedPosts",
+        saveId
+      ),
+      {
+
+        uid:me.uid,
+
+        postId:id,
+
+        createdAt:
+        serverTimestamp()
+
+      }
+    );
+
+  }
+
+};
+
+
+/* POST MENU */
+
+window.postMenu=async function(id){
+
+  const post=
+  posts.find(
+    x=>x.id===id
+  );
+
+
+  if(!post)
+    return;
+
+
+  if(post.uid!==me.uid){
+
+    alert(
+      "এটি অন্য user-এর post।"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    confirm(
+      "এই post delete করবেন?"
+    )
+  ){
+
+    await deleteDoc(
+      doc(db,"posts",id)
+    );
+
+  }
+
+};
+
+
+/* PROFILE */
+
+window.openMyProfile=function(){
+  const uid=window.me?.uid || window.currentUser?.uid;
+  if(!uid){ alert("Profile load হচ্ছে না। আবার login করুন।"); return; }
+  window.viewProfile(uid);
+};
+
+window.viewProfile=async function(uid){
+
+  if(!uid)
+    return;
+
+
+  /* Use cached user first; if the realtime listener has not loaded it yet,
+     fetch the profile directly so tapping a profile always opens it. */
+  let u=users[uid];
+
+  if(!u){
+
+    try{
+
+      const snap=await getDoc(
+        doc(db,"users",uid)
+      );
+
+      if(snap.exists()){
+        u={
+          uid:snap.id,
+          ...snap.data()
+        };
+        users[uid]=u;
+      }
+
+    }catch(error){
+      console.error("Profile load error:",error);
+    }
+
+  }
+
+
+  if(!u){
+
+    alert(
+      "Profile not found."
+    );
+
+    return;
+
+  }
+
+
+  currentPage="profile";
+
+  updateNav("profile");
+
+
+  const isMe=
+  uid===me.uid;
+
+
+  const friendCount=
+  getFriendIds(uid).length;
+
+
+  const myPosts=
+  posts.filter(
+    p=>p.uid===uid
+  );
+
+
+  document
+  .getElementById("app")
+  .innerHTML=`
+
+    <div class="profile">
+
+      <div class="cover">
+
+        ${
+          u.coverURL
+          ?
+          `<img src="${u.coverURL}">`
+          :
+          ""
+        }
+
+
+        ${
+          isMe
+          ?
+          `
+          <button
+            class="coverEdit"
+            type="button"
+            onclick="changeCoverPhoto()"
+          >
+            📷 Change Cover
+          </button>
+          `
+          :
+          ""
+        }
+
+      </div>
+
+
+      <div class="profileInfo">
+
+        <div class="avatarWrap">
+
+          <img
+            class="profileAvatar"
+            src="${
+              u.photoURL ||
+              defaultAvatar
+            }"
+          >
+
+
+          ${
+            isMe
+            ?
+            `
+            <button
+              class="avatarEdit"
+              onclick="openProfileEdit()"
+            >
+              📷
+            </button>
+            `
+            :
+            ""
+          }
+
+        </div>
+
+
+        <h1 class="profileName">
+
+          ${esc(
+            u.name ||
+            "User"
+          )}
+
+        </h1>
+
+
+        <div class="username">
+
+          @${esc(
+            u.username ||
+            "user"
+          )}
+
+        </div>
+
+
+        <div class="bio">
+
+          ${esc(
+            u.bio ||
+            "No bio yet."
+          )}
+
+        </div>
+
+
+        <div class="profileMeta">
+
+          ${
+            u.location
+            ?
+            `
+            <span>
+              📍 ${esc(u.location)}
+            </span>
+            `
+            :
+            ""
+          }
+
+
+          <span>
+            📅 Joined We Chat
+          </span>
+
+
+          <span>
+            ${
+              u.online
+              ?
+              "🟢 Online"
+              :
+              "⚪ Offline"
+            }
+          </span>
+
+        </div>
+
+
+        <div class="profileActions">
+
+          ${
+            isMe
+            ?
+
+            `
+            <button
+              class="editBtn"
+              onclick="openProfileEdit()"
+            >
+              ✏️ Edit Profile
+            </button>
+
+            <button
+              class="grayBtn"
+              onclick="createStory()"
+            >
+              📖 Story
+            </button>
+
+            <button
+              class="grayBtn"
+              onclick="openSoundSettings()"
+            >
+              🔊 Sound
+            </button>
+
+            <button
+              class="logoutBtn"
+              onclick="logout()"
+            >
+              🚪 Logout
+            </button>
+            `
+
+            :
+
+            `
+            ${
+              getFriendIds(me.uid).includes(uid)
+              ?
+              `<button class="grayBtn" disabled>✓ Friends</button>`
+              :
+              outgoingRequests.some(r=>r.to===uid)
+              ?
+              `<button class="grayBtn" onclick="cancelFriendRequestFor('${uid}')">Cancel Request</button>`
+              :
+              `<button class="editBtn" onclick="sendFriendRequest('${uid}')">👥 Add Friend</button>`
+            }
+
+            <button
+              class="grayBtn"
+              onclick="openChat('${uid}')"
+            >
+              💬 Message
+            </button>
+            `
+
+          }
+
+        </div>
+
+
+        <div class="stats">
+
+          <div class="stat">
+            <b>${myPosts.length}</b>
+            <span>Posts</span>
+          </div>
+
+          <div class="stat">
+            <b>${friendCount}</b>
+            <span>Friends</span>
+          </div>
+
+          <div class="stat">
+            <b>
+              ${
+                myPosts.filter(
+                  x=>x.imageURL
+                ).length
+              }
+            </b>
+            <span>Photos</span>
+          </div>
+
+          <div class="stat">
+            <b>
+              ${
+                myPosts.filter(
+                  x=>x.videoURL
+                ).length
+              }
+            </b>
+            <span>Videos</span>
+          </div>
+
+        </div>
+
+
+        <div class="profileTabs">
+
+          <button
+            class="active"
+            onclick="profilePosts('${uid}')"
+          >
+            Posts
+          </button>
+
+          <button
+            onclick="profilePhotos('${uid}')"
+          >
+            Photos
+          </button>
+
+          <button
+            onclick="profileVideos('${uid}')"
+          >
+            Videos
+          </button>
+
+          <button
+            onclick="profileAbout('${uid}')"
+          >
+            About
+          </button>
+
+          <button
+            onclick="profileFriends('${uid}')"
+          >
+            Friends
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="profileContent"
+      style="margin-top:15px"
+    >
+      ${renderPosts(myPosts)}
+    </div>
+
+  `;
+
+};
+
+
+/* PROFILE TABS */
+
+window.profilePosts=function(uid){
+
+  const list=
+  posts.filter(
+    p=>p.uid===uid
+  );
+
+
+  document
+  .getElementById("profileContent")
+  .innerHTML=
+  renderPosts(list);
+
+};
+
+
+window.profilePhotos=function(uid){
+
+  const list=
+  posts.filter(
+    p=>
+    p.uid===uid &&
+    p.imageURL
+  );
+
+
+  document
+  .getElementById("profileContent")
+  .innerHTML=
+
+  list.length
+
+  ?
+
+  `
+  <div
+    style="
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:6px
+    "
+  >
+
+    ${list.map(p=>`
+
+      <img
+        src="${p.imageURL}"
+        style="
+        width:100%;
+        height:160px;
+        object-fit:cover;
+        border-radius:8px
+        "
+      >
+
+    `).join("")}
+
+  </div>
+  `
+
+  :
+
+  `
+  <div
+    class="post"
+    style="
+    padding:30px;
+    text-align:center
+    "
+  >
+    No photos.
+  </div>
+  `;
+
+};
+
+
+window.profileVideos=function(uid){
+
+  const list=
+  posts.filter(
+    p=>
+    p.uid===uid &&
+    p.videoURL
+  );
+
+
+  document
+  .getElementById("profileContent")
+  .innerHTML=
+
+  list.length
+
+  ?
+
+  renderPosts(list)
+
+  :
+
+  `
+  <div
+    class="post"
+    style="
+    padding:30px;
+    text-align:center
+    "
+  >
+    No videos yet.
+  </div>
+  `;
+
+};
+
+
+window.profileAbout=function(uid){
+
+  const u=users[uid];
+
+
+  document
+  .getElementById("profileContent")
+  .innerHTML=`
+
+    <div
+      class="post"
+      style="padding:20px"
+    >
+
+      <h3>About</h3>
+
+      <p style="margin-top:15px">
+        <b>Name:</b>
+        ${esc(u.name || "")}
+      </p>
+
+      <p style="margin-top:10px">
+        <b>Username:</b>
+        @${esc(u.username || "")}
+      </p>
+
+      <p style="margin-top:10px">
+        <b>Location:</b>
+        ${esc(
+          u.location ||
+          "Not added"
+        )}
+      </p>
+
+      <p style="margin-top:10px">
+        <b>Bio:</b>
+        ${esc(
+          u.bio ||
+          "Not added"
+        )}
+      </p>
+
+    </div>
+
+  `;
+
+};
+
+
+window.profileFriends=function(uid){
+
+  const ids=
+  getFriendIds(uid);
+
+
+  const html=
+  ids.map(id=>{
+
+    const u=users[id];
+
+    if(!u)
+      return "";
+
+
+    return `
+
+      <div class="person">
+
+        <img
+          src="${
+            u.photoURL ||
+            defaultAvatar
+          }"
+        >
+
+        <div class="personInfo">
+
+          <b>
+            ${esc(
+              u.name ||
+              "User"
+            )}
+          </b>
+
+          <small>
+            @${esc(
+              u.username ||
+              ""
+            )}
+          </small>
+
+        </div>
+
+
+        <button
+          onclick="viewProfile('${u.uid}')"
+        >
+          View
+        </button>
+
+      </div>
+
+    `;
+
+  }).join("");
+
+
+  document
+  .getElementById("profileContent")
+  .innerHTML=
+
+  html ||
+
+  `
+  <div
+    class="post"
+    style="
+    padding:30px;
+    text-align:center
+    "
+  >
+    No friends yet.
+  </div>
+  `;
+
+};
+
+
+/* EDIT PROFILE */
+
+window.changeCoverPhoto=function(){
+
+  const input=document.getElementById("coverFile");
+
+  if(!input)
+    return;
+
+  input.value="";
+  input.click();
+
+};
+
+
+window.openProfileEdit=function(){
+
+  if(!myUser)
+    return;
+
+
+  document
+  .getElementById("editName")
+  .value=
+  myUser.name || "";
+
+
+  document
+  .getElementById("editUsername")
+  .value=
+  myUser.username || "";
+
+
+  document
+  .getElementById("editBio")
+  .value=
+  myUser.bio || "";
+
+
+  document
+  .getElementById("editLocation")
+  .value=
+  myUser.location || "";
+
+
+  document
+  .getElementById("profileModal")
+  .classList.add("show");
+
+};
+
+
+window.saveProfile=async function(){
+
+  const name=
+  document
+  .getElementById("editName")
+  .value
+  .trim();
+
+
+  const username=
+  document
+  .getElementById("editUsername")
+  .value
+  .trim();
+
+
+  const bio=
+  document
+  .getElementById("editBio")
+  .value
+  .trim();
+
+
+  const location=
+  document
+  .getElementById("editLocation")
+  .value
+  .trim();
+
+
+  const profileFile=
+  document
+  .getElementById("profileFile")
+  .files[0];
+
+
+  const coverFile=
+  document
+  .getElementById("coverFile")
+  .files[0];
+
+
+  let photoURL=
+  myUser.photoURL ||
+  defaultAvatar;
+
+
+  let coverURL=
+  myUser.coverURL ||
+  "";
+
+
+  if(profileFile){
+
+    photoURL=
+    await resizeImage(
+      profileFile,
+      450,
+      .50
+    );
+
+  }
+
+
+  if(coverFile){
+
+    coverURL=
+    await resizeImage(
+      coverFile,
+      1000,
+      .48
+    );
+
+  }
+
+
+  await updateDoc(
+    doc(db,"users",me.uid),
+    {
+
+      name,
+
+      username,
+
+      bio,
+
+      location,
+
+      photoURL,
+
+      coverURL
+
+    }
+  );
+
+
+  document
+  .getElementById("profileFile")
+  .value="";
+
+
+  document
+  .getElementById("coverFile")
+  .value="";
+
+
+  closeModal(
+    "profileModal"
+  );
+
+
+  viewProfile(window.me?.uid);
+
+};
+
+
+/* FRIEND IDs */
+
+function getFriendIds(uid){
+
+  const ids=[];
+
+
+  friends.forEach(f=>{
+
+    if(f.from===uid)
+      ids.push(f.to);
+
+    if(f.to===uid)
+      ids.push(f.from);
+
+  });
+
+
+  return [
+    ...new Set(ids)
+  ]
+  .filter(x=>users[x]);
+
+}
+
+
+/* FRIEND REQUEST */
+
+window.sendFriendRequest=async function(uid){
+
+  if(!uid || uid===me.uid)
+    return;
+
+
+  const alreadyFriend=
+  getFriendIds(me.uid)
+  .includes(uid);
+
+
+  if(alreadyFriend){
+
+    alert(
+      "Already friends."
+    );
+
+    return;
+
+  }
+
+
+  const exists=
+  outgoingRequests.find(
+    r=>
+    r.from===me.uid &&
+    r.to===uid
+  );
+
+
+  if(exists){
+
+    alert(
+      "Friend request already sent."
+    );
+
+    return;
+
+  }
+
+
+  await addDoc(
+    collection(db,"friendRequests"),
+    {
+
+      from:me.uid,
+
+      to:uid,
+
+      createdAt:
+      serverTimestamp()
+
+    }
+  );
+
+  await createNotification(
+    uid,
+    "friend_request",
+    me.uid,
+    "sent you a friend request"
+  );
+
+  alert(
+    "Friend request sent!"
+  );
+
+};
+
+
+async function createNotification(to,type,actorUid,text,extra={}){
+  if(!me || !to || to===me.uid) return;
+  try{
+    await addDoc(collection(db,"notifications"),{
+      to,
+      type,
+      actorUid:actorUid || me.uid,
+      text,
+      read:false,
+      createdAt:serverTimestamp(),
+      ...extra
+    });
+  }catch(error){
+    console.error("Notification create failed:",error);
+  }
+}
+
+async function markNotificationsRead(){
+  const unread=notifications.filter(n=>!n.read);
+  for(const n of unread){
+    try{ await updateDoc(doc(db,"notifications",n.id),{read:true}); }catch(e){}
+  }
+}
+
+function renderNotifications(){
+  const icon={friend_request:"👥",friend_accepted:"✅",story_reaction:"❤️",post_like:"👍",post_comment:"💬",app:"🔔"};
+  document.getElementById("app").innerHTML=`
+    <h2 class="sectionTitle">Notifications</h2>
+    <div class="post" style="padding:0;overflow:hidden">
+      ${notifications.length ? notifications.map(n=>{
+        const u=users[n.actorUid] || {};
+        return `<div class="notificationItem ${n.read ? "" : "unread"}" onclick="openNotification('${n.id}','${n.type}','${n.postId||""}')">
+          <div class="notificationIcon">${icon[n.type]||"🔔"}</div>
+          <div class="notificationText">
+            <b>${esc(u.name || "We Chat")}</b>
+            <span>${esc(n.text || "New notification")}</span>
+            <small>${timeAgo(n.createdAt)}</small>
+          </div>
+        </div>`;
+      }).join("") : `<div style="padding:35px;text-align:center">No notifications yet.</div>`}
+    </div>
+  `;
+}
+
+window.openNotification=async function(id,type,postId){
+  try{ await updateDoc(doc(db,"notifications",id),{read:true}); }catch(e){}
+  if(type==="friend_request" || type==="friend_accepted"){
+    friendsTab=type==="friend_request" ? "requests" : "friends";
+    showPage("friends");
+    return;
+  }
+  if(postId){
+    showPage("home");
+  }
+};
+
+function updateNotificationBadge(){
+  const badge=document.getElementById("notificationBadge");
+  if(!badge) return;
+  const unread=notifications.filter(n=>!n.read).length;
+  badge.textContent=unread;
+  badge.classList.toggle("hidden",unread===0);
+}
+
+
+/* REQUESTS */
+
+function renderRequests(){
+
+  document
+  .getElementById("app")
+  .innerHTML=`
+
+    <h2 class="sectionTitle">
+      Friend Requests
+    </h2>
+
+
+    ${
+      requests.length
+
+      ?
+
+      requests.map(r=>{
+
+        const u=users[r.from];
+
+        if(!u)
+          return "";
+
+
+        return `
+
+          <div class="person">
+
+            <img
+              src="${
+                u.photoURL ||
+                defaultAvatar
+              }"
+            >
+
+            <div class="personInfo">
+
+              <b>
+                ${esc(
+                  u.name ||
+                  "User"
+                )}
+              </b>
+
+              <small>
+                sent you a friend request
+              </small>
+
+            </div>
+
+
+            <div style="display:flex;gap:7px">
+              <button
+                onclick="acceptRequest('${r.id}','${r.from}')"
+              >
+                Accept
+              </button>
+              <button
+                style="background:#edf2f7;color:#344054"
+                onclick="rejectFriendRequest('${r.id}')"
+              >
+                Reject
+              </button>
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("")
+
+      :
+
+      `
+      <div
+        class="post"
+        style="
+        padding:35px;
+        text-align:center
+        "
+      >
+        No friend requests.
+      </div>
+      `
+
+    }
+
+  `;
+
+}
+
+
+window.cancelFriendRequest=async function(requestId){
+  if(!requestId) return;
+  try{
+    await deleteDoc(doc(db,"friendRequests",requestId));
+    alert("Friend request cancelled.");
+  }catch(error){
+    console.error(error);
+    alert("Cancel করা যায়নি।");
+  }
+};
+
+window.cancelFriendRequestFor=async function(uid){
+  const r=outgoingRequests.find(x=>x.to===uid);
+  if(!r) return;
+  if(confirm("Friend request cancel করবেন?")){
+    await cancelFriendRequest(r.id);
+  }
+};
+
+window.rejectFriendRequest=async function(requestId){
+  if(!requestId) return;
+  try{
+    await deleteDoc(doc(db,"friendRequests",requestId));
+    alert("Friend request rejected.");
+  }catch(error){
+    console.error(error);
+    alert("Reject করা যায়নি।");
+  }
+};
+
+
+window.acceptRequest=
+async function(
+  requestId,
+  from
+){
+
+  const friendId=
+  [from,me.uid]
+  .sort()
+  .join("_");
+
+
+  await setDoc(
+    doc(
+      db,
+      "friends",
+      friendId
+    ),
+    {
+
+      from,
+
+      to:me.uid,
+
+      createdAt:
+      serverTimestamp()
+
+    }
+  );
+
+
+  await deleteDoc(
+    doc(
+      db,
+      "friendRequests",
+      requestId
+    )
+  );
+
+  await createNotification(
+    from,
+    "friend_accepted",
+    me.uid,
+    "accepted your friend request"
+  );
+
+  alert(
+    "Friend added!"
+  );
+
+};
+
+
+/* FRIENDS */
+
+function renderFriends(){
+
+  const ids=getFriendIds(me.uid);
+
+  document.getElementById("app").innerHTML=`
+    <h2 class="sectionTitle">Friends</h2>
+
+    <div class="friendsTabs">
+      <button class="friendsTab ${friendsTab==="friends" ? "active" : ""}" onclick="setFriendsTab('friends')">
+        Friends
+      </button>
+      <button class="friendsTab ${friendsTab==="requests" ? "active" : ""}" onclick="setFriendsTab('requests')">
+        Friend Requests ${requests.length ? `<span class="tabBadge">${requests.length}</span>` : ""}
+      </button>
+      <button class="friendsTab ${friendsTab==="sent" ? "active" : ""}" onclick="setFriendsTab('sent')">
+        Sent Requests ${outgoingRequests.length ? `<span class="tabBadge">${outgoingRequests.length}</span>` : ""}
+      </button>
+    </div>
+
+    <div>
+      ${friendsTab==="friends" ? renderFriendsListHtml(ids) : ""}
+      ${friendsTab==="requests" ? renderIncomingRequestsHtml() : ""}
+      ${friendsTab==="sent" ? renderSentRequestsHtml() : ""}
+    </div>
+  `;
+
+}
+
+function renderFriendsListHtml(ids){
+  if(!ids.length){
+    return `<div class="post" style="padding:35px;text-align:center">You don't have friends yet.</div>`;
+  }
+  return ids.map(id=>{
+    const u=users[id];
+    return `
+      <div class="person">
+        <img src="${u.photoURL || defaultAvatar}">
+        <div class="personInfo">
+          <b>${esc(u.name || "User")}</b>
+          <small>@${esc(u.username || "")}</small>
+        </div>
+        <button onclick="openChat('${id}')">Chat</button>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderIncomingRequestsHtml(){
+  if(!requests.length){
+    return `<div class="post" style="padding:35px;text-align:center">No friend requests.</div>`;
+  }
+  return requests.map(r=>{
+    const u=users[r.from];
+    if(!u) return "";
+    return `
+      <div class="person">
+        <img src="${u.photoURL || defaultAvatar}">
+        <div class="personInfo">
+          <b>${esc(u.name || "User")}</b>
+          <small>sent you a friend request</small>
+        </div>
+        <div style="display:flex;gap:7px">
+          <button onclick="acceptRequest('${r.id}','${r.from}')">Accept</button>
+          <button style="background:#edf2f7;color:#344054" onclick="rejectFriendRequest('${r.id}')">Reject</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderSentRequestsHtml(){
+  if(!outgoingRequests.length){
+    return `<div class="post" style="padding:35px;text-align:center">No sent requests.</div>`;
+  }
+  return outgoingRequests.map(r=>{
+    const u=users[r.to];
+    if(!u) return "";
+    return `
+      <div class="person">
+        <img src="${u.photoURL || defaultAvatar}">
+        <div class="personInfo">
+          <b>${esc(u.name || "User")}</b>
+          <small>Friend request pending</small>
+        </div>
+        <button style="background:#edf2f7;color:#344054" onclick="cancelFriendRequest('${r.id}')">Cancel Request</button>
+      </div>
+    `;
+  }).join("");
+}
+
+window.setFriendsTab=function(tab){
+  if(!["friends","requests","sent"].includes(tab)) return;
+  friendsTab=tab;
+  showPage("friends");
+};
+
+/* CHAT LIST */
+
+
+function renderChats(){
+
+  const ids=
+  getFriendIds(me.uid);
+
+
+  document
+  .getElementById("app")
+  .innerHTML=`
+
+    <h2 class="sectionTitle">
+      Chats
+    </h2>
+
+
+    <div class="chatList">
+
+      ${
+        ids.length
+
+        ?
+
+        ids.map(id=>{
+
+          const u=users[id];
+
+          return `
+
+            <div
+              class="chatItem"
+              onclick="openChat('${id}')"
+            >
+
+              <img
+                src="${
+                  u.photoURL ||
+                  defaultAvatar
+                }"
+              >
+
+              <div class="chatInfo">
+
+                <b>
+                  ${esc(
+                    u.name ||
+                    "User"
+                  )}
+                </b>
+
+                <small>
+                  Tap to chat
+                </small>
+
+              </div>
+
+              <span>›</span>
+
+            </div>
+
+          `;
+
+        }).join("")
+
+        :
+
+        `
+        <div
+          class="post"
+          style="
+          padding:30px;
+          text-align:center
+          "
+        >
+          Add friends to start chatting.
+        </div>
+        `
+
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* OPEN CHAT */
+
+window.openChat=function(uid){
+
+  updateNav("chats");
+
+  const u=users[uid];
+
+  if(!u)
+    return;
+
+
+  currentChat=uid;
+
+
+  document
+  .getElementById("chatAvatar")
+  .src=
+  u.photoURL ||
+  defaultAvatar;
+
+
+  document
+  .getElementById("chatName")
+  .textContent=
+  u.name ||
+  "User";
+
+
+  document
+  .getElementById("chatWindow")
+  .classList.add("show");
+
+
+  renderChatMessages();
+
+};
+
+
+window.closeChat=function(){
+
+  currentChat=null;
+
+  document
+  .getElementById("chatWindow")
+  .classList.remove("show");
+
+};
+
+
+/* CHAT MESSAGES */
+
+function renderChatMessages(){
+
+  if(!currentChat)
+    return;
+
+
+  const list=
+  messages.filter(m=>
+
+    (
+      m.from===me.uid &&
+      m.to===currentChat
+    )
+
+    ||
+
+    (
+      m.from===currentChat &&
+      m.to===me.uid
+    )
+
+  );
+
+
+  document
+  .getElementById("chatMessages")
+  .innerHTML=
+
+  list.map(m=>`
+
+    <div
+      class="
+      msg
+      ${
+        m.from===me.uid
+        ?
+        "me"
+        :
+        "other"
+      }
+      "
+    >
+      ${esc(m.text)}
+    </div>
+
+  `).join("");
+
+
+  const box=
+  document
+  .getElementById(
+    "chatMessages"
+  );
+
+
+  box.scrollTop=
+  box.scrollHeight;
+
+}
+
+
+/* SEND MESSAGE */
+
+window.sendMessage=
+async function(){
+
+  const input=
+  document
+  .getElementById(
+    "messageInput"
+  );
+
+
+  const text=
+  input.value.trim();
+
+
+  if(
+    !text ||
+    !currentChat
+  )
+    return;
+
+
+  input.value="";
+
+
+  await addDoc(
+    collection(db,"messages"),
+    {
+
+      from:me.uid,
+
+      to:currentChat,
+
+      text,
+
+      createdAt:
+      serverTimestamp()
+
+    }
+  );
+
+};
+
+
+/* EXPLORE */
+
+function renderExplore(){
+
+  document
+  .getElementById("app")
+  .innerHTML=`
+
+    <h2 class="sectionTitle">
+      Explore
+    </h2>
+
+
+    <div
+      class="search"
+      style="
+      max-width:none;
+      margin-bottom:15px
+      "
+    >
+
+      🔎
+
+      <input
+        id="peopleSearch"
+        placeholder="Search people..."
+        oninput="searchPeople(this.value)"
+      >
+
+    </div>
+
+
+    <div id="peopleResults">
+
+      ${peopleHTML(
+        Object.values(users)
+      )}
+
+    </div>
+
+  `;
+
+}
+
+
+window.searchPeople=
+function(value){
+
+  const q=
+  value
+  .toLowerCase()
+  .trim();
+
+
+  const list=
+  Object
+  .values(users)
+  .filter(u=>
+
+    (u.name || "")
+    .toLowerCase()
+    .includes(q)
+
+    ||
+
+    (u.username || "")
+    .toLowerCase()
+    .includes(q)
+
+  );
+
+
+  document
+  .getElementById(
+    "peopleResults"
+  )
+  .innerHTML=
+  peopleHTML(list);
+
+};
+
+
+function peopleHTML(list){
+
+  return list
+
+  .filter(
+    u=>u.uid!==me.uid
+  )
+
+  .map(u=>`
+
+    <div class="person">
+
+      <img
+        src="${
+          u.photoURL ||
+          defaultAvatar
+        }"
+      >
+
+      <div class="personInfo">
+
+        <b>
+          ${esc(
+            u.name ||
+            "User"
+          )}
+        </b>
+
+        <small>
+          @${esc(
+            u.username ||
+            ""
+          )}
+        </small>
+
+      </div>
+
+
+      <button
+        onclick="viewProfile('${u.uid}')"
+      >
+        View
+      </button>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+/* SEARCH POSTS */
+
+window.doSearch=
+function(value){
+
+  if(!value.trim()){
+
+    if(
+      currentPage==="home"
+    ){
+
+      renderHome();
+
+    }
+
+    return;
+
+  }
+
+
+  const q=
+  value
+  .toLowerCase();
+
+
+  const list=
+  posts.filter(p=>{
+
+    const u=
+    users[p.uid];
+
+
+    return (
+
+      (p.text || "")
+      .toLowerCase()
+      .includes(q)
+
+      ||
+
+      (u?.name || "")
+      .toLowerCase()
+      .includes(q)
+
+      ||
+
+      (u?.username || "")
+      .toLowerCase()
+      .includes(q)
+
+    );
+
+  });
+
+
+  document
+  .getElementById("app")
+  .innerHTML=
+  renderPosts(list);
+
+};
+
+
+/* MODAL */
+
+window.closeModal=
+function(id){
+
+  document
+  .getElementById(id)
+  ?.classList
+  .remove("show");
+
+};
+
+
+/* IMAGE COMPRESS */
+
+async function resizeImage(
+  file,
+  maxSize,
+  quality
+){
+
+  return new Promise(
+    (resolve,reject)=>{
+
+      const reader=
+      new FileReader();
+
+
+      reader.onload=e=>{
+
+        const img=
+        new Image();
+
+
+        img.onload=()=>{
+
+          let w=img.width;
+
+          let h=img.height;
+
+
+          if(
+            w>maxSize ||
+            h>maxSize
+          ){
+
+            const scale=
+            Math.min(
+              maxSize/w,
+              maxSize/h
+            );
+
+
+            w=
+            Math.round(
+              w*scale
+            );
+
+
+            h=
+            Math.round(
+              h*scale
+            );
+
+          }
+
+
+          const canvas=
+          document.createElement(
+            "canvas"
+          );
+
+
+          canvas.width=w;
+
+          canvas.height=h;
+
+
+          const ctx=
+          canvas.getContext(
+            "2d"
+          );
+
+
+          ctx.drawImage(
+            img,
+            0,
+            0,
+            w,
+            h
+          );
+
+
+          resolve(
+            canvas.toDataURL(
+              "image/jpeg",
+              quality
+            )
+          );
+
+        };
+
+
+        img.onerror=reject;
+
+        img.src=e.target.result;
+
+      };
+
+
+      reader.onerror=reject;
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+
+}
+
+
+/* REQUEST BADGE */
+
+function updateRequestBadge(){
+  updateNotificationBadge();
+}
+
+
+/* TIME */
+
+function timeAgo(timestamp){
+
+  if(!timestamp)
+    return "Just now";
+
+
+  let date;
+
+
+  try{
+
+    date=
+    timestamp.toDate();
+
+  }catch{
+
+    date=
+    new Date();
+
+  }
+
+
+  const diff=
+  Math.floor(
+    (
+      Date.now()-
+      date.getTime()
+    )/1000
+  );
+
+
+  if(diff<60)
+    return "Just now";
+
+
+  if(diff<3600)
+    return (
+      Math.floor(diff/60)+
+      " min ago"
+    );
+
+
+  if(diff<86400)
+    return (
+      Math.floor(diff/3600)+
+      " hours ago"
+    );
+
+
+  return (
+    Math.floor(diff/86400)+
+    " days ago"
+  );
+
+}
+
+
+/* ESCAPE HTML */
+
+function esc(value=""){
+
+  return String(value)
+
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+
+  .replaceAll(
+    ">",
+    "&gt;"
+  )
+
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+
+  .replaceAll(
+    "'",
+    "&#039;"
+  );
+
+}
+
+
+/* PROFILE LINK */
+
+window.copyProfileLink=
+function(uid){
+
+  const url=
+  location.origin+
+  location.pathname+
+  "?profile="+
+  encodeURIComponent(uid);
+
+
+  if(
+    navigator.clipboard
+  ){
+
+    navigator.clipboard
+    .writeText(url)
+    .then(()=>{
+      alert(
+        "Profile link copied!"
+      );
+    });
+
+  }else{
+
+    prompt(
+      "Copy profile link:",
+      url
+    );
+
+  }
+
+};
+
+
+/* AUTO OPEN PROFILE */
+
+const params=
+new URLSearchParams(
+  location.search
+);
+
+
+const profileId=
+params.get("profile");
+
+
+if(profileId){
+
+  setTimeout(()=>{
+
+    viewProfile(
+      profileId
+    );
+
+  },1800);
+
+}
+
+
+/* LOGOUT */
+
+window.logout=
+async function(){
+
+  if(
+    !confirm(
+      "Log out from We Chat?"
+    )
+  )
+    return;
+
+
+  try{
+
+    await updateDoc(
+      doc(
+        db,
+        "users",
+        me.uid
+      ),
+      {
+        online:false
+      }
+    );
+
+  }catch{}
+
+
+  await signOut(auth);
+  me=null;
+  window.me=null;
+  window.currentUser=null;
+  soundRequestSeenIds=new Set();
+  soundMessageSeenIds=new Set();
+  soundNotificationSeenIds=new Set();
+  soundRequestInitialized=false;
+  soundMessageInitialized=false;
+  soundNotificationInitialized=false;
+
+};
+
+</script>
+
+</body>
+</html>

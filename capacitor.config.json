@@ -1,0 +1,8 @@
+{
+  "appId": "com.wechat.app",
+  "appName": "We Chat",
+  "webDir": "public",
+  "server": {
+    "androidScheme": "https"
+  }
+}
