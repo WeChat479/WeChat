@@ -532,6 +532,62 @@ img{max-width:100%;display:block}
   box-shadow:0 7px 17px rgba(45,100,230,.3)
 }
 
+/* MODERN POST COMPOSER */
+.postCreateBox{
+  width:min(100%,560px);
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:28px;
+  padding:0;
+  box-shadow:0 24px 70px rgba(10,30,60,.25);
+}
+.postCreateHead{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px 14px;border-bottom:1px solid #edf0f5
+}
+.postCreateHead h2{font-size:21px}
+.postCreateSub{font-size:12px;color:#8993a3;margin-top:3px}
+.postCreateBody{padding:18px 20px 20px}
+.postCreateUser{display:flex;align-items:center;gap:11px;margin-bottom:15px}
+.postCreateUser img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.postCreateUser b{display:block;font-size:15px}
+.audienceSelect{margin-top:4px;border:0;background:#edf2f7;border-radius:9px;padding:4px 9px;font-size:12px;color:#4c586a;outline:none}
+.postTextModern{width:100%;min-height:110px;border:0;outline:0;resize:none;font-size:20px;line-height:1.5;padding:4px 0;color:#1d2735}
+.postTextModern::placeholder{color:#9aa4b3}
+.mediaDrop{border:1.5px dashed #cfd8e5;border-radius:18px;padding:14px;margin-top:12px;background:#f8fafc}
+.mediaDropTop{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.mediaDropTitle{font-weight:700;font-size:14px}
+.mediaDropHint{font-size:11px;color:#8993a3;margin-top:3px}
+.mediaBtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.mediaBtn{border:0;border-radius:12px;padding:10px 13px;font-weight:700;background:#eef4ff;color:#1769e8}
+.mediaBtn.video{background:#f2edff;color:#6b42d8}
+.mediaBtn.feeling{background:#fff4e5;color:#e48b00}
+.mediaPreview{display:none;margin-top:12px;border-radius:16px;overflow:hidden;background:#101828;position:relative}
+.mediaPreview.show{display:block}
+.mediaPreview img,.mediaPreview video{width:100%;max-height:320px;object-fit:contain;background:#101828}
+.previewRemove{position:absolute;right:10px;top:10px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.65);color:#fff;font-size:20px;z-index:2}
+.videoUrlRow{display:none;margin-top:10px;gap:8px}
+.videoUrlRow.show{display:flex}
+.videoUrlRow input{flex:1;border:1px solid #dfe5ee;border-radius:12px;padding:11px;outline:0}
+.videoUrlApply{border-radius:12px;background:#1877f2;color:#fff;padding:0 14px;font-weight:700}
+.feelingPills{display:none;gap:7px;flex-wrap:wrap;margin-top:10px}
+.feelingPills.show{display:flex}
+.feelingPills button{background:#f2f4f8;border-radius:18px;padding:7px 10px;color:#465267}
+.postActionRow{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:16px;align-items:center}
+.addPostCard{border:1px solid #e3e8ef;border-radius:14px;padding:11px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.addPostTitle{font-size:13px;font-weight:700;color:#445066}
+.addPostIcons{display:flex;gap:6px}
+.addMini{width:34px;height:34px;border-radius:10px;background:#f2f5f9;font-size:18px}
+.publishBtn{height:48px;border-radius:14px;background:#1877f2;color:#fff;font-weight:800;padding:0 22px;box-shadow:0 6px 16px rgba(24,119,242,.25)}
+.publishBtn:disabled{opacity:.45;box-shadow:none}
+@media(max-width:560px){
+  .postCreateBox{border-radius:22px;max-height:94vh}
+  .postTextModern{font-size:18px;min-height:95px}
+  .postActionRow{grid-template-columns:1fr}
+  .publishBtn{width:100%}
+}
+
 /* MODAL */
 
 .modal{
@@ -732,6 +788,100 @@ img{max-width:100%;display:block}
   color:#e0314f;
   border:1px solid #ffd5dc
 }
+
+/* CUSTOM LOGOUT DIALOG - logout UI only */
+.logoutDialogOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.48);
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+  padding:18px;
+}
+.logoutDialogOverlay.show{display:flex}
+.logoutDialog{
+  width:min(100%,390px);
+  background:#fff;
+  border-radius:24px;
+  box-shadow:0 24px 70px rgba(0,0,0,.24);
+  padding:28px 22px 22px;
+  text-align:center;
+  animation:logoutDialogIn .18s ease-out;
+}
+@keyframes logoutDialogIn{
+  from{opacity:0;transform:translateY(10px) scale(.97)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.logoutDialogIcon{
+  width:62px;
+  height:62px;
+  margin:0 auto 14px;
+  border-radius:18px;
+  background:#eaf8ef;
+  color:#16a34a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  font-weight:800;
+}
+.logoutDialog h3{
+  margin:0;
+  font-size:21px;
+  color:#172033;
+}
+.logoutDialog p{
+  margin:9px 0 22px;
+  color:#667085;
+  font-size:14px;
+  line-height:1.55;
+}
+.logoutDialogActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.logoutDialogActions button{
+  height:46px;
+  border:0;
+  border-radius:13px;
+  font-weight:700;
+  font-size:14px;
+}
+.logoutCancelBtn{
+  background:#edf1f5;
+  color:#475467;
+}
+.logoutConfirmBtn{
+  background:#16a34a;
+  color:#fff;
+}
+.logoutConfirmBtn:disabled{
+  opacity:.72;
+}
+.logoutLoading{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color:#475467;
+  font-size:13px;
+  margin-top:14px;
+}
+.logoutLoading.show{display:flex}
+.logoutSpinner{
+  width:16px;
+  height:16px;
+  border:2px solid #d0d5dd;
+  border-top-color:#16a34a;
+  border-radius:50%;
+  animation:logoutSpin .7s linear infinite;
+}
+@keyframes logoutSpin{to{transform:rotate(360deg)}}
 
 .stats{
   display:grid;
@@ -1184,6 +1334,41 @@ img{max-width:100%;display:block}
 .settingsActions{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:12px 0 5px}
 .settingsBack{width:100%;margin-top:10px;height:46px;border-radius:13px;background:#fff;border:1px solid #dce3ec;color:#344054;font-weight:700}
 @media(max-width:420px){.settingsActions{grid-template-columns:1fr}.settingsSelect{min-width:105px}.settingsHero{padding:17px}.settingsCard{padding:5px 12px}.settingsTitle{font-size:14px}}
+
+/* ===== Incoming / Audio / Video Call UI ===== */
+#callOverlay{display:none;position:fixed;inset:0;z-index:99999;background:rgba(8,18,28,.88);align-items:center;justify-content:center;padding:18px}
+#callOverlay.show{display:flex}
+.callCard{width:min(430px,100%);background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.callHead{background:#07c160;color:#fff;padding:18px;text-align:center}
+.callAvatar{width:82px;height:82px;border-radius:50%;object-fit:cover;border:3px solid #fff;margin:8px auto}
+.callTitle{font-size:21px;font-weight:700}.callSub{opacity:.9;margin-top:4px}
+.callVideo{display:none;width:100%;max-height:55vh;background:#111;object-fit:cover}
+.callBody{padding:18px;text-align:center}
+.callActions{display:flex;gap:12px;justify-content:center;margin-top:18px}
+.callBtn{border:0;border-radius:999px;padding:13px 20px;font-weight:700;cursor:pointer}
+.callAccept{background:#07c160;color:#fff}.callReject{background:#e53935;color:#fff}.callEnd{background:#222;color:#fff}
+.callSwitch{background:#eef2f4;color:#222}
+#remoteVideo{width:100%;display:none;background:#111}
+#localVideo{position:absolute;right:28px;top:28px;width:110px;height:150px;object-fit:cover;border-radius:14px;border:2px solid #fff;display:none;z-index:2}
+
+
+/* ===== Call Permission Dialog ===== */
+#callPermissionOverlay{display:none;position:fixed;inset:0;z-index:100001;background:rgba(8,18,28,.58);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px}
+#callPermissionOverlay.show{display:flex}
+.callPermissionCard{width:min(390px,100%);background:#fff;border-radius:24px;padding:22px 20px 18px;box-shadow:0 22px 70px rgba(0,0,0,.28);text-align:center}
+.callPermissionIcon{width:70px;height:70px;margin:0 auto 10px;border-radius:22px;background:#edf4ff;color:#1877f2;display:grid;place-items:center;font-size:34px}
+.callPermissionTitle{margin:4px 0 7px;font-size:22px;font-weight:800;color:#172033}
+.callPermissionText{margin:0 auto 16px;max-width:330px;font-size:13px;line-height:1.6;color:#64748b}
+.callPermissionList{display:grid;gap:9px;text-align:left;margin:0 0 17px}
+.callPermissionItem{display:flex;align-items:center;gap:10px;background:#f7f9fc;border-radius:14px;padding:10px 12px}
+.callPermissionItemIcon{width:38px;height:38px;border-radius:12px;background:#eaf2ff;color:#1877f2;display:grid;place-items:center;font-size:19px;flex:0 0 auto}
+.callPermissionItem b{display:block;color:#253047;font-size:13px}.callPermissionItem span{display:block;color:#7a8799;font-size:11px;margin-top:2px}
+.callPermissionActions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.callPermissionBtn{height:46px;border:0;border-radius:13px;font-weight:800;font-size:14px;cursor:pointer}
+.callPermissionCancel{background:#eef2f6;color:#344054}.callPermissionAllow{background:#1877f2;color:#fff;box-shadow:0 8px 18px rgba(24,119,242,.22)}
+.callPermissionBtn:disabled{opacity:.65;cursor:wait}
+.callPermissionStatus{display:none;margin:12px 0 0;color:#d93025;font-size:12px;line-height:1.45}
+
 </style>
 </head>
 
@@ -1311,67 +1496,81 @@ img{max-width:100%;display:block}
 
 <!-- POST MODAL -->
 
-<div
-  class="modal"
-  id="postModal"
->
-
-  <div class="modalBox">
-
-    <div class="modalHead">
-
-      <h2>Create Post</h2>
-
-      <button
-        class="close"
-        onclick="closeModal('postModal')"
-      >×</button>
-
+<div class="modal" id="postModal">
+  <div class="postCreateBox">
+    <div class="postCreateHead">
+      <div>
+        <h2>Create Post</h2>
+        <div class="postCreateSub">Photo, video, feeling & text</div>
+      </div>
+      <button class="close" type="button" onclick="closeModal('postModal')">×</button>
     </div>
 
-    <div class="field">
+    <div class="postCreateBody">
+      <div class="postCreateUser">
+        <img id="postComposerAvatar" src="" alt="">
+        <div>
+          <b id="postComposerName">You</b>
+          <select id="postAudience" class="audienceSelect">
+            <option value="public">🌐 Public</option>
+            <option value="friends">👥 Friends</option>
+            <option value="onlyme">🔒 Only me</option>
+          </select>
+        </div>
+      </div>
 
-      <label>What’s on your mind?</label>
+      <textarea id="postText" class="postTextModern" placeholder="What's on your mind?"></textarea>
 
-      <textarea
-        id="postText"
-        placeholder="Write something..."
-      ></textarea>
+      <div class="mediaDrop">
+        <div class="mediaDropTop">
+          <div>
+            <div class="mediaDropTitle">Add to your post</div>
+            <div class="mediaDropHint">ছবি বা ভিডিও বেছে নিয়ে আগে preview দেখুন</div>
+          </div>
+          <span style="font-size:22px">✨</span>
+        </div>
 
+        <div class="mediaBtns">
+          <button type="button" class="mediaBtn" onclick="choosePostPhoto()">📷 Photo</button>
+          <button type="button" class="mediaBtn video" onclick="choosePostVideo()">🎥 Video</button>
+          <button type="button" class="mediaBtn feeling" onclick="toggleFeelingPills()">😊 Feeling</button>
+        </div>
+
+        <div id="feelingPills" class="feelingPills">
+          <button type="button" onclick="setPostFeeling('😊 Feeling good!')">😊 Good</button>
+          <button type="button" onclick="setPostFeeling('❤️ Feeling loved!')">❤️ Loved</button>
+          <button type="button" onclick="setPostFeeling('🔥 Feeling great!')">🔥 Great</button>
+          <button type="button" onclick="setPostFeeling('😎 Feeling cool!')">😎 Cool</button>
+        </div>
+
+        <div id="postMediaPreview" class="mediaPreview">
+          <button type="button" class="previewRemove" onclick="clearPostMedia()">×</button>
+          <img id="postImagePreview" alt="Photo preview">
+          <video id="postLocalVideoPreview" controls playsinline></video>
+        </div>
+
+        <div id="videoUrlRow" class="videoUrlRow">
+          <input id="postVideo" placeholder="অথবা Video URL paste করুন...">
+          <button type="button" class="videoUrlApply" onclick="applyVideoUrl()">Add</button>
+        </div>
+
+        <input id="postFile" type="file" accept="image/*" hidden onchange="previewPostPhoto(event)">
+        <input id="postVideoFile" type="file" accept="video/*" hidden onchange="previewPostVideo(event)">
+      </div>
+
+      <div class="postActionRow">
+        <div class="addPostCard">
+          <span class="addPostTitle">Ready to publish</span>
+          <div class="addPostIcons">
+            <button type="button" class="addMini" onclick="choosePostPhoto()">🖼️</button>
+            <button type="button" class="addMini" onclick="choosePostVideo()">🎬</button>
+            <button type="button" class="addMini" onclick="toggleFeelingPills()">😊</button>
+          </div>
+        </div>
+        <button id="createPostBtn" type="button" class="publishBtn" onclick="createPost()">Post</button>
+      </div>
     </div>
-
-    <div class="field">
-
-      <label>Photo</label>
-
-      <input
-        id="postFile"
-        type="file"
-        accept="image/*"
-      >
-
-    </div>
-
-    <div class="field">
-
-      <label>Video URL (optional)</label>
-
-      <input
-        id="postVideo"
-        placeholder="Paste video URL..."
-      >
-
-    </div>
-
-    <button
-      class="primary"
-      onclick="createPost()"
-    >
-      Post
-    </button>
-
   </div>
-
 </div>
 
 
@@ -1456,7 +1655,7 @@ img{max-width:100%;display:block}
 
     <button
       class="iconBtn"
-      onclick="closeChat()"
+      onclick="handleAppBack()"
     >
       ‹
     </button>
@@ -1469,10 +1668,15 @@ img{max-width:100%;display:block}
       title="Open profile"
     >
 
-    <div>
+    <div style="flex:1;min-width:0">
       <b id="chatName">Chat</b>
       <small id="chatStatus">We Chat</small>
     </div>
+
+    <button type="button" class="iconBtn" id="audioCallBtn" title="Audio Call"
+      onclick="event.preventDefault();event.stopPropagation();window.__explicitCallRequest=true;startCallTo(window.currentChat,'audio')">📞</button>
+    <button type="button" class="iconBtn" id="videoCallBtn" title="Video Call"
+      onclick="event.preventDefault();event.stopPropagation();window.__explicitCallRequest=true;startCallTo(window.currentChat,'video')">🎥</button>
 
   </div>
 
@@ -1540,6 +1744,7 @@ import {
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
   createUserWithEmailAndPassword,
   updateProfile,
   signOut
@@ -1594,6 +1799,7 @@ const firebaseConfig={
 
 
 const firebaseApp=initializeApp(firebaseConfig);
+window.firebaseApp=firebaseApp;
 
 const auth=getAuth(firebaseApp);
 
@@ -1607,6 +1813,7 @@ let me=null;
 let myUser=null;
 
 let users={};
+window.users=users;
 
 let posts=[];
 
@@ -1626,6 +1833,7 @@ let friendsTab="friends";
 let notificationSeenIds=new Set();
 
 let currentChat=null;
+window.currentChat=null;
 
 let currentPage="home";
 
@@ -1657,15 +1865,23 @@ function saveSoundSettings(){
 }
 loadSoundSettings();
 
-function ensureAudio(){
+async function ensureAudio(){
   try{
-    if(!soundCtx) soundCtx=new (window.AudioContext||window.webkitAudioContext)();
-    if(soundCtx.state==="suspended") soundCtx.resume();
-    soundReady=true;
-  }catch(e){ soundReady=false; }
+    const AudioClass=window.AudioContext||window.webkitAudioContext;
+    if(!AudioClass) return false;
+    if(!soundCtx) soundCtx=new AudioClass();
+    if(soundCtx.state==="suspended") await soundCtx.resume();
+    soundReady=(soundCtx.state==="running");
+    return soundReady;
+  }catch(e){
+    console.error("Audio init failed:",e);
+    soundReady=false;
+    return false;
+  }
 }
 
-document.addEventListener("pointerdown",ensureAudio,{passive:true});
+document.addEventListener("pointerdown",()=>{ ensureAudio(); },{passive:true});
+document.addEventListener("touchstart",()=>{ ensureAudio(); },{passive:true});
 
 function tone(freq,start,duration,type="sine",gain=.045){
   if(!soundReady || !soundCtx) return;
@@ -1680,9 +1896,12 @@ function tone(freq,start,duration,type="sine",gain=.045){
   o.stop(soundCtx.currentTime+start+duration+.03);
 }
 
-function playBuiltInSound(kind){
-  ensureAudio();
-  if(!soundReady) return;
+async function playBuiltInSound(kind){
+  const ready=await ensureAudio();
+  if(!ready) {
+    alert("Sound চালু করতে ফোনের media/sound volume বাড়িয়ে আবার Test চাপুন।");
+    return;
+  }
   const selected=soundSettings[kind+"Tone"] || "pop";
   if(kind==="friend"){
     if(selected==="chime"){
@@ -1705,7 +1924,7 @@ function playBuiltInSound(kind){
   }
 }
 
-async function requestBrowserNotification(){
+window.requestBrowserNotification=async function(){
   if(!("Notification" in window)) return "unsupported";
   if(Notification.permission==="granted") return "granted";
   if(Notification.permission!=="denied") return await Notification.requestPermission();
@@ -1792,7 +2011,7 @@ function renderSettings(){
         <button class="settingsBtn gray" onclick="requestBrowserNotification().then(x=>alert(x==='granted'?'Browser notification enabled.':x==='denied'?'Permission denied.':'Browser notification unavailable.'))">📱 Allow Browser Notification</button>
       </div>
     </div>
-    <button class="settingsBack" onclick="viewProfile(window.me?.uid)">← Back to Profile</button>
+    <button class="settingsBack" onclick="handleAppBack()">← Back</button>
   `;
 }
 
@@ -1806,8 +2025,8 @@ window.changeSoundTone=function(kind,value){
   soundSettings[kind+"Tone"]=value;
   saveSoundSettings();
 };
-window.testSound=function(kind){
-  playBuiltInSound(kind);
+window.testSound=async function(kind){
+  await playBuiltInSound(kind);
 };
 window.toggleBrowserNotifications=async function(){
   if(soundSettings.browser){
@@ -1894,7 +2113,8 @@ function showLoginMessage(){
         <div id="authError" style="color:#d93025;font-size:14px;margin:10px 0;min-height:20px"></div>
 
         <button class="primary" style="width:100%" onclick="loginUser()">Log In</button>
-        <button class="secondary" style="width:100%;margin-top:10px" onclick="showRegisterForm()">Create New Account</button>
+        <button type="button" style="width:100%;margin-top:10px;background:none;border:0;color:#1877f2;font-weight:600;padding:10px" onclick="forgotPassword()">Forgot Password?</button>
+        <button class="secondary" style="width:100%;margin-top:4px" onclick="showRegisterForm()">Create New Account</button>
       </div>
     </div>
   `;
@@ -1934,6 +2154,34 @@ function authErrorText(error){
   };
   return map[code] || error?.message || "Something went wrong.";
 }
+
+window.forgotPassword=async function(){
+  const email=document.getElementById("authEmail")?.value.trim();
+  const box=document.getElementById("authError");
+  if(!email){
+    if(box) box.textContent="আগে Email লিখুন, তারপর Forgot Password চাপুন।";
+    document.getElementById("authEmail")?.focus();
+    return;
+  }
+  if(box) box.textContent="Sending password reset email...";
+  try{
+    await sendPasswordResetEmail(auth,email);
+    if(box) box.style.color="#188038";
+    if(box) box.textContent="Password reset link sent. Email inbox এবং Spam folder চেক করুন।";
+  }catch(error){
+    if(box) box.style.color="#d93025";
+    const code=error?.code||"";
+    const msg={
+      "auth/invalid-email":"Email address ঠিক নেই।",
+      "auth/user-not-found":"এই Email দিয়ে কোনো account পাওয়া যায়নি।",
+      "auth/operation-not-allowed":"Firebase Authentication-এ Email/Password sign-in চালু নেই।",
+      "auth/too-many-requests":"অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।",
+      "auth/network-request-failed":"Internet connection সমস্যা। আবার চেষ্টা করুন।"
+    };
+    if(box) box.textContent=msg[code] || (error?.message || "Password reset email পাঠানো যায়নি।");
+    console.error("Password reset error:",error);
+  }
+};
 
 window.loginUser=async function(){
   const email=document.getElementById("authEmail")?.value.trim();
@@ -3142,7 +3390,7 @@ function renderPosts(list){
             <div class="postMeta">
 
               ${timeAgo(p.createdAt)}
-              · 🌐 Public
+              · ${p.audience==="friends" ? "👥 Friends" : p.audience==="onlyme" ? "🔒 Only me" : "🌐 Public"}
 
             </div>
 
@@ -3372,137 +3620,177 @@ function renderPosts(list){
 /* POST MODAL */
 
 window.openPost=function(type=""){
+  const modal=document.getElementById("postModal");
+  if(!modal)return;
+  modal.classList.add("show");
 
-  document
-  .getElementById("postModal")
-  .classList.add("show");
+  const av=document.getElementById("postComposerAvatar");
+  const nm=document.getElementById("postComposerName");
+  if(av) av.src=myUser?.photoURL || defaultAvatar;
+  if(nm) nm.textContent=myUser?.name || "You";
 
+  clearPostMedia();
+  const text=document.getElementById("postText");
+  if(text) text.focus();
 
-  const file=
-  document.getElementById("postFile");
-
-
-  if(type==="photo"){
-
-    setTimeout(()=>{
-      file.click();
-    },150);
-
-  }
-
-
-  if(type==="video"){
-
-    document
-    .getElementById("postVideo")
-    .focus();
-
-  }
-
-
-  if(type==="feeling"){
-
-    document
-    .getElementById("postText")
-    .value="😊 Feeling good!";
-
-  }
-
+  if(type==="photo") setTimeout(()=>choosePostPhoto(),120);
+  if(type==="video") setTimeout(()=>choosePostVideo(),120);
+  if(type==="feeling") toggleFeelingPills();
 };
 
+window.choosePostPhoto=function(){
+  const input=document.getElementById("postFile");
+  if(input){input.value="";input.click();}
+};
 
-/* CREATE POST */
+window.choosePostVideo=function(){
+  const input=document.getElementById("postVideoFile");
+  if(input){input.value="";input.click();}
+  const row=document.getElementById("videoUrlRow");
+  if(row) row.classList.add("show");
+};
+
+window.toggleFeelingPills=function(){
+  document.getElementById("feelingPills")?.classList.toggle("show");
+};
+
+window.setPostFeeling=function(value){
+  const text=document.getElementById("postText");
+  if(text) text.value=value;
+  document.getElementById("feelingPills")?.classList.remove("show");
+  updatePostButtonState();
+};
+
+window.previewPostPhoto=function(event){
+  const file=event.target.files?.[0];
+  if(!file)return;
+  if(!file.type.startsWith("image/")){alert("শুধু ছবি নির্বাচন করুন।");return;}
+  const url=URL.createObjectURL(file);
+  const box=document.getElementById("postMediaPreview");
+  const img=document.getElementById("postImagePreview");
+  const vid=document.getElementById("postLocalVideoPreview");
+  if(img){img.src=url;img.style.display="block";}
+  if(vid){vid.pause();vid.removeAttribute("src");vid.load();vid.style.display="none";}
+  if(box)box.classList.add("show");
+  updatePostButtonState();
+};
+
+window.previewPostVideo=function(event){
+  const file=event.target.files?.[0];
+  if(!file)return;
+  if(!file.type.startsWith("video/")){alert("শুধু ভিডিও নির্বাচন করুন।");return;}
+  const url=URL.createObjectURL(file);
+  const box=document.getElementById("postMediaPreview");
+  const img=document.getElementById("postImagePreview");
+  const vid=document.getElementById("postLocalVideoPreview");
+  if(img){img.removeAttribute("src");img.style.display="none";}
+  if(vid){vid.src=url;vid.style.display="block";}
+  if(box)box.classList.add("show");
+  updatePostButtonState();
+};
+
+window.applyVideoUrl=function(){
+  const input=document.getElementById("postVideo");
+  const url=(input?.value||"").trim();
+  if(!url){alert("Video URL দিন।");return;}
+  const box=document.getElementById("postMediaPreview");
+  const img=document.getElementById("postImagePreview");
+  const vid=document.getElementById("postLocalVideoPreview");
+  if(img){img.removeAttribute("src");img.style.display="none";}
+  if(vid){vid.src=url;vid.style.display="block";}
+  if(box)box.classList.add("show");
+  updatePostButtonState();
+};
+
+window.clearPostMedia=function(){
+  const photo=document.getElementById("postFile");
+  const video=document.getElementById("postVideoFile");
+  const img=document.getElementById("postImagePreview");
+  const vid=document.getElementById("postLocalVideoPreview");
+  const box=document.getElementById("postMediaPreview");
+  const url=document.getElementById("postVideo");
+  if(photo)photo.value="";
+  if(video)video.value="";
+  if(img){if(img.src.startsWith("blob:"))URL.revokeObjectURL(img.src);img.removeAttribute("src");img.style.display="none";}
+  if(vid){if(vid.src.startsWith("blob:"))URL.revokeObjectURL(vid.src);vid.pause();vid.removeAttribute("src");vid.load();vid.style.display="none";}
+  if(url)url.value="";
+  if(box)box.classList.remove("show");
+  document.getElementById("videoUrlRow")?.classList.remove("show");
+  updatePostButtonState();
+};
+
+function updatePostButtonState(){
+  const btn=document.getElementById("createPostBtn");
+  if(!btn)return;
+  const text=(document.getElementById("postText")?.value||"").trim();
+  const photo=document.getElementById("postFile")?.files?.[0];
+  const localVideo=document.getElementById("postVideoFile")?.files?.[0];
+  const videoURL=(document.getElementById("postVideo")?.value||"").trim();
+  btn.disabled=!(text||photo||localVideo||videoURL);
+}
+
+document.addEventListener("input",e=>{
+  if(e.target?.id==="postText" || e.target?.id==="postVideo") updatePostButtonState();
+});
 
 window.createPost=async function(){
+  if(!me){alert("আগে login করুন।");return;}
+  const text=(document.getElementById("postText")?.value||"").trim();
+  const photo=document.getElementById("postFile")?.files?.[0] || null;
+  const localVideo=document.getElementById("postVideoFile")?.files?.[0] || null;
+  const videoURL=(document.getElementById("postVideo")?.value||"").trim();
+  const audience=document.getElementById("postAudience")?.value || "public";
 
-  const text=
-  document
-  .getElementById("postText")
-  .value
-  .trim();
-
-
-  const file=
-  document
-  .getElementById("postFile")
-  .files[0];
-
-
-  const videoURL=
-  document
-  .getElementById("postVideo")
-  .value
-  .trim();
-
-
-  if(!text && !file && !videoURL){
-
-    alert(
-      "কিছু লিখুন অথবা ছবি/ভিডিও দিন।"
-    );
-
+  if(!text && !photo && !localVideo && !videoURL){
+    alert("কিছু লিখুন অথবা ছবি/ভিডিও দিন।");
     return;
-
+  }
+  if(photo && localVideo){
+    alert("একসাথে Photo অথবা Video—একটি নির্বাচন করুন।");
+    return;
   }
 
+  const btn=document.getElementById("createPostBtn");
+  if(btn){btn.disabled=true;btn.textContent="Posting…";}
 
-  let imageURL="";
+  try{
+    let imageURL="";
+    let finalVideoURL=videoURL;
 
-
-  if(file){
-
-    imageURL=
-    await resizeImage(
-      file,
-      1000,
-      .55
-    );
-
-  }
-
-
-  await addDoc(
-    collection(db,"posts"),
-    {
-
-      uid:me.uid,
-
-      text,
-
-      imageURL,
-
-      videoURL,
-
-      likes:[],
-
-      comments:[],
-
-      createdAt:
-      serverTimestamp()
-
+    if(photo){
+      imageURL=await resizeImage(photo,1000,.55);
     }
-  );
 
+    /* Local video preview is supported, but persistence still uses a URL because
+       the existing app does not have Firebase Storage wired into this file. */
+    if(localVideo && !finalVideoURL){
+      alert("ভিডিও পোস্ট করতে আগে Video URL দিন। Local video preview কাজ করবে, কিন্তু এই ফাইলের বর্তমান Firebase setup-এ video file storage চালু করা হয়নি।");
+      if(btn){btn.disabled=false;btn.textContent="Post";}
+      return;
+    }
 
-  document
-  .getElementById("postText")
-  .value="";
+    await addDoc(collection(db,"posts"),{
+      uid:me.uid,
+      text,
+      imageURL,
+      videoURL:finalVideoURL,
+      audience,
+      likes:[],
+      comments:[],
+      createdAt:serverTimestamp()
+    });
 
-
-  document
-  .getElementById("postFile")
-  .value="";
-
-
-  document
-  .getElementById("postVideo")
-  .value="";
-
-
-  closeModal("postModal");
-
+    const t=document.getElementById("postText");
+    if(t)t.value="";
+    closeModal("postModal");
+    clearPostMedia();
+  }catch(error){
+    console.error("createPost error",error);
+    alert("Post করা যায়নি: "+(error?.message||"Unknown error"));
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent="Post";}
+  }
 };
-
 
 /* LIKE */
 
@@ -5070,6 +5358,12 @@ function renderChats(){
 
 window.openChat=function(uid){
 
+  // Opening a chat must never start a call or leave a pending call-permission dialog.
+  window.__explicitCallRequest=false;
+  try{
+    if(typeof cancelCallPermission==="function") cancelCallPermission();
+  }catch(e){}
+
   updateNav("chats");
 
   const u=users[uid];
@@ -5079,6 +5373,7 @@ window.openChat=function(uid){
 
 
   currentChat=uid;
+  window.currentChat=uid;
 
 
   document
@@ -5121,6 +5416,7 @@ window.openChatProfile=function(){
 window.closeChat=function(){
 
   currentChat=null;
+  window.currentChat=null;
 
   document
   .getElementById("chatWindow")
@@ -5719,31 +6015,69 @@ if(profileId){
 window.logout=
 async function(){
 
-  if(
-    !confirm(
-      "Log out from We Chat?"
-    )
-  )
+  const overlay=document.getElementById("logoutDialogOverlay");
+  if(!overlay){
+    await performLogout();
     return;
+  }
 
+  overlay.classList.add("show");
+  document.body.style.overflow="hidden";
+  const confirmBtn=document.getElementById("logoutConfirmBtn");
+  const cancelBtn=document.getElementById("logoutCancelBtn");
+  const loading=document.getElementById("logoutLoading");
+
+  if(confirmBtn) confirmBtn.disabled=false;
+  if(cancelBtn) cancelBtn.disabled=false;
+  if(loading) loading.classList.remove("show");
+};
+
+window.closeLogoutDialog=function(){
+  const overlay=document.getElementById("logoutDialogOverlay");
+  if(overlay) overlay.classList.remove("show");
+  document.body.style.overflow="";
+};
+
+window.confirmLogout=function(){
+  const confirmBtn=document.getElementById("logoutConfirmBtn");
+  const cancelBtn=document.getElementById("logoutCancelBtn");
+  const loading=document.getElementById("logoutLoading");
+
+  if(confirmBtn) confirmBtn.disabled=true;
+  if(cancelBtn) cancelBtn.disabled=true;
+  if(loading) loading.classList.add("show");
+
+  setTimeout(async()=>{
+    await performLogout();
+  },120);
+};
+
+async function performLogout(){
 
   try{
 
-    await updateDoc(
-      doc(
-        db,
-        "users",
-        me.uid
-      ),
-      {
-        online:false
-      }
-    );
+    if(me?.uid){
+      await updateDoc(
+        doc(
+          db,
+          "users",
+          me.uid
+        ),
+        {
+          online:false
+        }
+      );
+    }
 
   }catch{}
 
 
-  await signOut(auth);
+  try{
+    await signOut(auth);
+  }catch(e){
+    console.error("Logout error:",e);
+  }
+
   notificationsInitialized=false;
   messagesInitialized=false;
   notificationSeenIds=new Set();
@@ -5752,8 +6086,469 @@ async function(){
   window.me=null;
   window.currentUser=null;
 
+  const overlay=document.getElementById("logoutDialogOverlay");
+  if(overlay) overlay.classList.remove("show");
+  document.body.style.overflow="";
+}
+
+</script>
+
+<!-- Custom logout dialog - no other app UI changed -->
+<div id="logoutDialogOverlay" class="logoutDialogOverlay" onclick="if(event.target===this)closeLogoutDialog()">
+  <div class="logoutDialog" role="dialog" aria-modal="true" aria-labelledby="logoutDialogTitle">
+    <div class="logoutDialogIcon">↪</div>
+    <h3 id="logoutDialogTitle">লগ আউট করবেন?</h3>
+    <p>আপনি কি নিশ্চিত আপনি We Chat থেকে লগ আউট করতে চান?</p>
+    <div class="logoutDialogActions">
+      <button type="button" id="logoutCancelBtn" class="logoutCancelBtn" onclick="closeLogoutDialog()">বাতিল</button>
+      <button type="button" id="logoutConfirmBtn" class="logoutConfirmBtn" onclick="confirmLogout()">লগ আউট</button>
+    </div>
+    <div id="logoutLoading" class="logoutLoading">
+      <span class="logoutSpinner"></span>
+      <span>লগ আউট হচ্ছে...</span>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Custom call microphone/camera permission dialog -->
+<div id="callPermissionOverlay" onclick="if(event.target===this)cancelCallPermission()">
+  <div class="callPermissionCard" role="dialog" aria-modal="true" aria-labelledby="callPermissionTitle">
+    <div class="callPermissionIcon" id="callPermissionIcon">🎙️</div>
+    <h3 id="callPermissionTitle" class="callPermissionTitle">পারমিশন প্রয়োজন</h3>
+    <p id="callPermissionText" class="callPermissionText">কল করার জন্য প্রয়োজনীয় পারমিশন দিন। আপনার অনুমতি ছাড়া মাইক্রোফোন বা ক্যামেরা ব্যবহার করা হবে না।</p>
+    <div class="callPermissionList">
+      <div class="callPermissionItem">
+        <div class="callPermissionItemIcon">🎙️</div>
+        <div><b>মাইক্রোফোন</b><span>অডিও কলের জন্য প্রয়োজন</span></div>
+      </div>
+      <div class="callPermissionItem" id="callPermissionCameraItem">
+        <div class="callPermissionItemIcon">📹</div>
+        <div><b>ক্যামেরা</b><span>ভিডিও কলের জন্য প্রয়োজন</span></div>
+      </div>
+      <div class="callPermissionItem">
+        <div class="callPermissionItemIcon">🔒</div>
+        <div><b>নিরাপদ সংযোগ</b><span>HTTPS সংযোগে কল করা হচ্ছে</span></div>
+      </div>
+    </div>
+    <div class="callPermissionActions">
+      <button type="button" class="callPermissionBtn callPermissionCancel" onclick="cancelCallPermission()">বাতিল</button>
+      <button type="button" id="callPermissionAllowBtn" class="callPermissionBtn callPermissionAllow" onclick="allowCallPermission()">পারমিশন দিন</button>
+    </div>
+    <div id="callPermissionStatus" class="callPermissionStatus"></div>
+  </div>
+</div>
+
+<!-- Call overlay -->
+<div id="callOverlay">
+  <div class="callCard">
+    <div class="callHead">
+      <img id="callAvatar" class="callAvatar" src="" alt="">
+      <div id="callTitle" class="callTitle">Call</div>
+      <div id="callSub" class="callSub">Incoming call...</div>
+    </div>
+    <div style="position:relative">
+      <video id="remoteVideo" autoplay playsinline></video>
+      <video id="localVideo" autoplay muted playsinline></video>
+    </div>
+    <div class="callBody">
+      <div id="callHint">Choose an option</div>
+      <div class="callActions">
+        <button id="callAcceptBtn" class="callBtn callAccept" onclick="acceptIncomingCall()">Accept</button>
+        <button id="callRejectBtn" class="callBtn callReject" onclick="rejectIncomingCall()">Reject</button>
+        <button id="callEndBtn" class="callBtn callEnd" onclick="endCurrentCall()" style="display:none">End</button>
+        <button id="callSwitchBtn" class="callBtn callSwitch" onclick="toggleCallMode()" style="display:none">Video</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="module">
+import { getFirestore, collection, addDoc, doc, setDoc, updateDoc, getDoc,
+         onSnapshot, serverTimestamp, query, where, limit } 
+  from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } 
+  from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+const appRef = window.firebaseApp || (window.app || null);
+let callDb = null, callAuth = null, callMe = null;
+let pc = null, localStream = null, activeCallId = null;
+let isCaller = false, callMode = "audio", callUnsubs = [];
+window.__explicitCallRequest=false;
+let callPermissionResolve=null;
+let callPermissionMode="audio";
+
+function showCallPermission(mode="audio"){
+  callPermissionMode=mode;
+  const o=q("callPermissionOverlay");
+  if(!o) return Promise.resolve(true);
+  const cam=q("callPermissionCameraItem");
+  const icon=q("callPermissionIcon");
+  const title=q("callPermissionTitle");
+  const text=q("callPermissionText");
+  const status=q("callPermissionStatus");
+  const btn=q("callPermissionAllowBtn");
+  if(cam) cam.style.display=mode==="video"?"flex":"none";
+  if(icon) icon.textContent=mode==="video"?"🎥":"🎙️";
+  if(title) title.textContent=mode==="video"?"পারমিশন প্রয়োজন":"মাইক্রোফোন পারমিশন প্রয়োজন";
+  if(text) text.textContent=mode==="video"
+    ?"ভিডিও কল করার জন্য মাইক্রোফোন ও ক্যামেরার অনুমতি দিন। আপনার অনুমতি ছাড়া এগুলো ব্যবহার করা হবে না।"
+    :"অডিও কল করার জন্য মাইক্রোফোনের অনুমতি দিন। আপনার অনুমতি ছাড়া মাইক্রোফোন ব্যবহার করা হবে না।";
+  if(status){status.style.display="none";status.textContent=""}
+  if(btn){btn.disabled=false;btn.textContent="পারমিশন দিন"}
+  o.classList.add("show");
+  return new Promise(resolve=>{callPermissionResolve=resolve});
+}
+
+function cancelCallPermission(){
+  const r=callPermissionResolve; callPermissionResolve=null;
+  q("callPermissionOverlay")?.classList.remove("show");
+  if(r) r(false);
+}
+
+async function allowCallPermission(){
+  const btn=q("callPermissionAllowBtn");
+  const status=q("callPermissionStatus");
+  if(btn){btn.disabled=true;btn.textContent="চেক করা হচ্ছে..."}
+  if(status){status.style.display="none";status.textContent=""}
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true,video:callPermissionMode==="video"});
+    const r=callPermissionResolve; callPermissionResolve=null;
+    q("callPermissionOverlay")?.classList.remove("show");
+    if(r) r(stream);
+  }catch(e){
+    console.error("Call permission error:",e);
+    if(status){
+      status.style.display="block";
+      status.textContent=e?.name==="NotAllowedError"
+        ?"পারমিশন দেওয়া হয়নি। Allow/অনুমতি দিন নির্বাচন করে আবার চেষ্টা করুন।"
+        :"মাইক্রোফোন/ক্যামেরা চালু করা যায়নি। Browser permission ও HTTPS সংযোগ চেক করুন।";
+    }
+    if(btn){btn.disabled=false;btn.textContent="আবার চেষ্টা করুন"}
+  }
+}
+
+async function requestCallMedia(mode="audio"){
+  if(!navigator.mediaDevices?.getUserMedia){
+    throw Object.assign(new Error("এই browser-এ microphone/camera call support নেই। HTTPS browser দিয়ে চেষ্টা করুন."),{name:"UnsupportedMedia"});
+  }
+  return await showCallPermission(mode);
+}
+
+
+function q(id){return document.getElementById(id)}
+function showCall(show){q("callOverlay")?.classList.toggle("show",!!show)}
+function setCallText(title,sub,hint){
+  if(q("callTitle")) q("callTitle").textContent=title||"Call";
+  if(q("callSub")) q("callSub").textContent=sub||"";
+  if(q("callHint")) q("callHint").textContent=hint||"";
+}
+function cleanupCallListeners(){callUnsubs.forEach(u=>{try{u()}catch(e){}});callUnsubs=[]}
+async function closeCallMedia(){
+  if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null}
+  if(pc){try{pc.close()}catch(e){} pc=null}
+  if(q("remoteVideo")){q("remoteVideo").srcObject=null;q("remoteVideo").style.display="none"}
+  if(q("localVideo")){q("localVideo").srcObject=null;q("localVideo").style.display="none"}
+}
+
+async function ensureCallDb(){
+  if(callDb) return true;
+  if(!window.firebaseApp) return false;
+  try{
+    const mod = await import("https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js");
+    callDb = mod.getFirestore(window.firebaseApp);
+    callAuth = getAuth(window.firebaseApp);
+    return true;
+  }catch(e){console.error("Call setup error",e);return false}
+}
+function rtcConfig(){
+  return {iceServers:[
+    {urls:"stun:stun.l.google.com:19302"},
+    {urls:"stun:stun1.l.google.com:19302"}
+  ]};
+}
+async function getMedia(mode){
+  const wantVideo = mode==="video";
+  return navigator.mediaDevices.getUserMedia({audio:true,video:wantVideo});
+}
+
+async function startCallTo(uid, mode="audio"){
+  // A call may start only from an explicit tap on the Audio/Video call button.
+  // This prevents chat opening/navigation or other events from triggering a call.
+  if(window.__explicitCallRequest!==true) return;
+  window.__explicitCallRequest=false;
+
+  // Make sure the call system/auth state is ready before starting.
+  if(!await ensureCallDb()){
+    alert("Call system চালু হয়নি। আবার login করে চেষ্টা করুন।");
+    return;
+  }
+  if(!callMe && window.me) callMe=window.me;
+  if(!callMe){
+    alert("Call system প্রস্তুত হচ্ছে। একটু পরে আবার চেষ্টা করুন।");
+    return;
+  }
+  if(!uid || uid===callMe.uid){
+    alert("নিজেকে call করা যাবে না।");
+    return;
+  }
+  if(!navigator.mediaDevices?.getUserMedia){
+    alert("এই browser-এ microphone/camera call support নেই। HTTPS browser দিয়ে চেষ্টা করুন।");
+    return;
+  }
+
+  // A previous call must be fully cleaned before a new one starts.
+  if(activeCallId || pc || localStream){
+    await endCurrentCall(true);
+  }
+
+  try{
+    callMode=mode; isCaller=true;
+    localStream=await requestCallMedia(mode);
+    if(!localStream){ return; }
+    pc=new RTCPeerConnection(rtcConfig());
+    localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
+    pc.ontrack=e=>{
+      const v=q("remoteVideo");
+      if(v){
+        v.srcObject=e.streams[0];
+        v.style.display=callMode==="video"?"block":"none";
+      }
+    };
+
+    // Register ICE handler BEFORE creating the offer so early candidates are not lost.
+    let callRef;
+    const callData={
+      caller:callMe.uid,
+      callee:uid,
+      mode,
+      status:"ringing",
+      createdAt:serverTimestamp()
+    };
+    callRef=await addDoc(collection(callDb,"calls"),callData);
+    activeCallId=callRef.id;
+    const candCol=collection(callRef,"callerCandidates");
+    pc.onicecandidate=e=>{
+      if(e.candidate){
+        addDoc(candCol,e.candidate.toJSON()).catch(err=>console.error("ICE candidate error",err));
+      }
+    };
+
+    const offer=await pc.createOffer();
+    await pc.setLocalDescription(offer);
+    await updateDoc(callRef,{offer:{type:offer.type,sdp:offer.sdp}});
+
+    setCallText("Calling…","Waiting for answer",mode==="video"?"Video call":"Audio call");
+    q("callAcceptBtn").style.display="none";
+    q("callRejectBtn").style.display="none";
+    q("callEndBtn").style.display="inline-block";
+    q("callSwitchBtn").style.display=mode==="audio"?"inline-block":"none";
+    showCall(true);
+
+    const unsub=onSnapshot(callRef,async snap=>{
+      const d=snap.data();
+      if(!d || !pc)return;
+      try{
+        if(d.answer && !pc.currentRemoteDescription){
+          await pc.setRemoteDescription(new RTCSessionDescription(d.answer));
+        }
+      }catch(err){console.error("Remote answer error",err)}
+      if(d.status==="rejected" || d.status==="ended"){
+        await endCurrentCall(true);
+      }
+    });
+    callUnsubs.push(unsub);
+
+    const calleeCand=collection(callRef,"calleeCandidates");
+    callUnsubs.push(onSnapshot(calleeCand,s=>{
+      s.docChanges().forEach(async c=>{
+        if(c.type==="added" && pc){
+          try{await pc.addIceCandidate(c.doc.data())}catch(e){console.error("Remote ICE error",e)}
+        }
+      });
+    }));
+  }catch(e){
+    console.error("Call start error:",e);
+    const msg=e?.code==="permission-denied"
+      ? "Firebase Firestore rules call করার permission দিচ্ছে না। Calls collection-এর rules ঠিক করতে হবে।"
+      : e?.name==="NotAllowedError"
+      ? "Microphone/Camera permission দেওয়া হয়নি। Browser permission Allow করুন।"
+      : (e?.message||"অজানা সমস্যা");
+    if(activeCallId && callDb){try{await updateDoc(doc(callDb,"calls",activeCallId),{status:"ended"})}catch(_){} }
+    activeCallId=null;
+    cleanupCallListeners();
+    await closeCallMedia();
+    showCall(false);
+    if(e?.name!=="NotAllowedError" && e?.name!=="UnsupportedMedia") alert("Call শুরু হয়নি: "+msg);
+  }
+}
+
+async function acceptIncomingCall(){
+  if(!activeCallId || !callDb || !callMe)return;
+  try{
+    const callRef=doc(callDb,"calls",activeCallId);
+    const snap=await getDoc(callRef); const d=snap.data();
+    if(!d?.offer)return;
+    callMode=d.mode||"audio"; isCaller=false;
+    localStream=await requestCallMedia(callMode);
+    if(!localStream){ return; }
+    pc=new RTCPeerConnection(rtcConfig());
+    localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
+    pc.ontrack=e=>{const v=q("remoteVideo");if(v){v.srcObject=e.streams[0];v.style.display=callMode==="video"?"block":"none"}};
+    pc.onicecandidate=e=>{if(e.candidate)addDoc(collection(callRef,"calleeCandidates"),e.candidate.toJSON())};
+    await pc.setRemoteDescription(new RTCSessionDescription(d.offer));
+    const answer=await pc.createAnswer(); await pc.setLocalDescription(answer);
+    await updateDoc(callRef,{answer:{type:answer.type,sdp:answer.sdp},status:"accepted"});
+    q("callAcceptBtn").style.display="none";q("callRejectBtn").style.display="none";
+    q("callEndBtn").style.display="inline-block";q("callSwitchBtn").style.display=callMode==="audio"?"inline-block":"none";
+    setCallText(d.callee===callMe.uid?"Call":"Call","Connected",callMode==="video"?"Video call":"Audio call");
+    const callerCand=collection(callRef,"callerCandidates");
+    callUnsubs.push(onSnapshot(callerCand,s=>s.docChanges().forEach(async c=>{
+      if(c.type==="added"&&pc)try{await pc.addIceCandidate(c.doc.data())}catch(e){}
+    })));
+  }catch(e){console.error(e);if(e?.name!=="NotAllowedError" && e?.name!=="UnsupportedMedia") alert("Call accept হয়নি: "+(e.message||e))}
+}
+async function rejectIncomingCall(){
+  if(activeCallId&&callDb)try{await updateDoc(doc(callDb,"calls",activeCallId),{status:"rejected"})}catch(e){}
+  await endCurrentCall(true);
+}
+async function endCurrentCall(silent=false){
+  if(activeCallId&&callDb)try{await updateDoc(doc(callDb,"calls",activeCallId),{status:"ended"})}catch(e){}
+  activeCallId=null; cleanupCallListeners(); await closeCallMedia(); showCall(false);
+  if(!silent)setCallText("Call","Ended","");
+}
+async function toggleCallMode(){
+  if(!localStream||!pc)return;
+  if(callMode==="audio"){
+    try{
+      const s=await requestCallMedia("video");
+      if(!s) return;
+      const track=s.getVideoTracks()[0]; pc.addTrack(track,s);
+      localStream.addTrack(track); callMode="video";
+      q("localVideo").srcObject=localStream;q("localVideo").style.display="block";
+      q("remoteVideo").style.display="block";q("callSwitchBtn").textContent="Audio";
+    }catch(e){console.error(e);if(e?.name!=="NotAllowedError" && e?.name!=="UnsupportedMedia") alert("Camera চালু হয়নি।")}
+  }else{
+    localStream.getVideoTracks().forEach(t=>{t.stop();localStream.removeTrack(t)});
+    const sender=pc.getSenders().find(s=>s.track?.kind==="video"); if(sender)await sender.replaceTrack(null);
+    callMode="audio";q("localVideo").style.display="none";q("remoteVideo").style.display="none";q("callSwitchBtn").textContent="Video";
+  }
+}
+window.ensureCallDb=ensureCallDb;
+window.startCallTo=startCallTo;window.acceptIncomingCall=acceptIncomingCall;
+window.rejectIncomingCall=rejectIncomingCall;window.endCurrentCall=endCurrentCall;
+window.toggleCallMode=toggleCallMode;
+
+async function initCallSystem(){
+  if(!await ensureCallDb()) return;
+  onAuthStateChanged(callAuth,user=>{
+    callMe=user||null;
+    if(!user) return;
+
+    const qy=query(
+      collection(callDb,"calls"),
+      where("callee","==",user.uid),
+      limit(20)
+    );
+
+    onSnapshot(qy,snap=>{
+      const hit=snap.docs.find(x=>x.data()?.status==="ringing");
+      if(!hit) return;
+
+      const d=hit.data();
+      activeCallId=hit.id;
+      callMode=d.mode||"audio";
+
+      const u=(window.users&&window.users[d.caller])||{};
+      const name=u.name||"Incoming call";
+      const avatar=u.photoURL||u.avatar||"";
+
+      if(q("callAvatar")) q("callAvatar").src=avatar;
+      setCallText(name,"Incoming call…",callMode==="video"?"Video call":"Audio call");
+
+      q("callAcceptBtn").style.display="inline-block";
+      q("callRejectBtn").style.display="inline-block";
+      q("callEndBtn").style.display="none";
+      q("callSwitchBtn").style.display="none";
+      showCall(true);
+    });
+  });
+}
+
+
+/* GLOBAL BACK BEHAVIOR */
+let backArmed=false;
+let backTimer=null;
+let backLeaving=false;
+
+async function closeCallForBack(){
+  // Back from a call returns to Home and safely closes the call UI/media.
+  if(activeCallId || pc || localStream){
+    try{await endCurrentCall(true)}catch(e){
+      activeCallId=null;
+      cleanupCallListeners();
+      try{await closeCallMedia()}catch(_){ }
+      showCall(false);
+    }
+    return;
+  }
+  const overlay=document.getElementById("callOverlay");
+  if(overlay) overlay.classList.remove("show");
+}
+
+function goHomeFromBack(){
+  // Every in-app Back goes to Home.
+  const chat=document.getElementById("chatWindow");
+  if(chat && chat.classList.contains("show")){
+    currentChat=null;
+    window.currentChat=null;
+    chat.classList.remove("show");
+  }
+
+  currentPage="home";
+  updateNav("home");
+  renderHome();
+  window.scrollTo(0,0);
+  return true;
+}
+
+window.handleAppBack=async function(){
+  // Second Back within 2 seconds on Home: try to leave the app/screen.
+  if(backArmed){
+    backArmed=false;
+    clearTimeout(backTimer);
+    backLeaving=true;
+    try{window.close()}catch(e){}
+    // Normal browser tabs usually block window.close(); history.back() is the fallback.
+    setTimeout(()=>{
+      if(!backLeaving)return;
+      try{history.back()}catch(e){}
+    },150);
+    return;
+  }
+
+  // First Back: always Home, including Chat and Settings.
+  await closeCallForBack();
+  goHomeFromBack();
+  backArmed=true;
+  clearTimeout(backTimer);
+  backTimer=setTimeout(()=>{backArmed=false},2000);
 };
 
+// Android/browser Back button uses the same rule.
+try{
+  history.pushState({weChatBack:true},"",location.href);
+  window.addEventListener("popstate",async()=>{
+    if(backLeaving)return;
+    await window.handleAppBack();
+    try{history.pushState({weChatBack:true},"",location.href)}catch(e){}
+  });
+}catch(e){}
+
+initCallSystem();
 </script>
 
 </body>
